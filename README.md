@@ -9,3 +9,6 @@
   su zimbra
   zmzimletctl deploy br_com_immail.zip
   zmprov mc default +zimbraProxyAllowedDomains *.immail.com.br
+
+  ## After update the zimlet may be you have to clean the cache
+  zmprov flushCache zimlet
