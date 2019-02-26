@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<zimletConfig name="br_com_immail" version="0.0.1">
+  <global>
+    <property name="iframeURL">https://app.immail.com.br</property>
+    <property name="apiURL">https://api.immail.com.br/</property>
+  </global>
+</zimletConfig>
