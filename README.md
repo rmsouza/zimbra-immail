@@ -2,6 +2,8 @@
 
 # Installation
 
+Estando no servidor onde o Zimbra encontra-se instalado:
+
 ```
 git clone https://github.com/myinfoshare-user/zimbra-immail.git
 
