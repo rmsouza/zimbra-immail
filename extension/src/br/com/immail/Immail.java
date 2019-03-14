@@ -155,7 +155,11 @@ public class Immail extends ExtensionHttpHandler {
      */
     @Override
     public void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
-        resp.getOutputStream().print("br.com.immail is installed. HTTP GET method will be supported");
+        resp.setStatus(HttpServletResponse.SC_OK);
+        resp.setHeader("Content-Type", "text/html");
+        resp.getWriter().write("<html><head></head><body><div style=\"background-color:white;color:black;padding:10px\">Please <a target=\"_blank\" href=''>Log in</a>.</div></body>");
+        resp.getWriter().flush();
+        resp.getWriter().close();
     }
 
     private void responseWriter(String action, HttpServletResponse resp, String message) {

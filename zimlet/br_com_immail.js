@@ -17,12 +17,15 @@ function br_com_immail_HandlerObject() {
 */
 br_com_immail_HandlerObject.prototype = new ZmZimletBase();
 br_com_immail_HandlerObject.prototype.constructor = br_com_immail_HandlerObject;
+var ZimbraImmailZimlet = br_com_immail_HandlerObject;
 
 /**
 * This method gets called by the Zimlet framework when the zimlet loads.
 */
-br_com_immail_HandlerObject.prototype.init = function() {
+ZimbraImmailZimlet.prototype.init = function() {
   this._simpleAppName = this.createApp("imMail App", "zimbraIcon", "imMail - Professional messaging app");
+
+  ZimbraImmailZimlet.prototype.testRequest();
 };
 
 /**
@@ -30,7 +33,7 @@ br_com_immail_HandlerObject.prototype.init = function() {
 *
 * @param	{String}	appName		the application name
 */
-br_com_immail_HandlerObject.prototype.appLaunch = function(appName) {
+ZimbraImmailZimlet.prototype.appLaunch = function(appName) {
   switch (appName) {
     case this._simpleAppName: {
       // do something
@@ -40,4 +43,30 @@ br_com_immail_HandlerObject.prototype.appLaunch = function(appName) {
       break;
     }
   }
+};
+
+ZimbraImmailZimlet.prototype.testRequest = function()
+{
+   var zimletInstance = appCtxt._zimletMgr.getZimletByName('br_com_immail').handlerObject;
+   try{
+      var xhr = new XMLHttpRequest();
+      xhr.open('GET', '/service/extension/immail');
+
+      xhr.onerror = function (err) {
+         console.log(err);
+      };
+
+      xhr.send();
+      xhr.onreadystatechange = function (oEvent)
+      {
+         console.log('xhr');
+         if (xhr.readyState === 4)
+         {
+            console.log(xhr.status);
+            console.log(xhr.response);
+         }
+      }
+   } catch (err) {
+      console.log(err);
+   }
 };

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<zimletConfig name="br_com_immail" version="0.0.4">
+<zimletConfig name="br_com_immail" version="0.0.5">
   <global>
     <property name="iframeURL">https://testapp.immail.com.br/#!/login?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6IjViZjc3MjFiMzY0NGJkMTQ0MTkxYzhkOCIsImVtYWlsIjoicmFmYWVsQGltbWFpbC5jb20uYnIiLCJwcmVmZXJlbmNlcyI6eyJub3RpZmljYXRpb25zIjp7ImVtYWlsIjp0cnVlLCJtb2JpbGUiOnRydWV9fSwicHJvZmlsZV9pZCI6IjViZjc3MjFiMzY0NGJkMTQ0MTkxYzhkYyIsImFkX3VzZXIiOmZhbHNlfSwiaWF0IjoxNTQ5Mzk1NTg3fQ._5y-0HfWi0GYzbPPqBCXhx0PNLT-mnQz-mgz4jfTJxk</property>
     <property name="apiURL">https://testapi.immail.com.br/</property>
