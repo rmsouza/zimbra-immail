@@ -34,12 +34,19 @@ import com.zimbra.cs.account.AuthToken;
 import com.zimbra.cs.account.Cos;
 import com.zimbra.cs.account.Provisioning;
 import com.zimbra.cs.extension.ExtensionHttpHandler;
+import org.json.JSONObject;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
+import java.io.*;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.nio.charset.StandardCharsets;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Properties;
 import java.util.Set;
 
 public class Immail extends ExtensionHttpHandler {
@@ -54,12 +61,9 @@ public class Immail extends ExtensionHttpHandler {
         return "/immail";
     }
 
-    private String adminAuthToken;
-    private String adminUserId;
-    private String adminUserName;
-    private String adminPassword;
-    private String rocketURL;
-    private String loginurl;
+    private String immailApiKey;
+    private String immailURL;
+    private String immailCreateTokenPath;
 
     /**
      * Processes HTTP POST requests.
@@ -116,9 +120,41 @@ public class Immail extends ExtensionHttpHandler {
             return;
         }
 
-        String name = zimbraAccount.getName();
-        responseWriter("ok", resp, name);
-        return;
+        final Map<String, String> paramsMap = new HashMap<String, String>();
+
+        if (req.getQueryString() != null) {
+            String[] params = req.getQueryString().split("&");
+            for (String param : params) {
+                String[] subParam = param.split("=");
+                paramsMap.put(subParam[0], subParam[1]);
+            }
+        } else {
+            responseWriter("ok", resp, null);
+            return;
+        }
+
+        //Initializes immailApiKey, immailURL, immailCreateTokenPath on this instance
+        if (this.initializeImmailAPI()) {
+            switch (paramsMap.get("action")) {
+                case "signOn":
+                    String token;
+                    token = this.createAuthToken(zimbraAccount.getName());
+                    if (!"".equals(token)) {
+                        resp.setHeader("Content-Type", "application/json");
+                        responseWriter("ok", resp, "{\"token\":\""+token+"\"}");
+                    } else {
+                        responseWriter("error", resp, null);
+                    }
+                    break;
+
+            }
+        } else {
+            responseWriter("error", resp, null);
+        }
+
+//        String name = zimbraAccount.getName();
+//        responseWriter("ok", resp, name);
+//        return
 
     }
 
@@ -149,6 +185,82 @@ public class Immail extends ExtensionHttpHandler {
             resp.getWriter().close();
         } catch (Exception e) {
             e.printStackTrace();
+        }
+    }
+
+    public Boolean initializeImmailAPI() {
+        Properties prop = new Properties();
+        try {
+            FileInputStream input = new FileInputStream("/opt/zimbra/lib/ext/immail/config.properties");
+            prop.load(input);
+            this.immailApiKey = prop.getProperty("immailApiKey");
+            this.immailURL = prop.getProperty("immailURL");
+            this.immailCreateTokenPath = prop.getProperty("immailCreateTokenPath");
+            input.close();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return false;
+        }
+
+        return true;
+    }
+
+    /**
+     * In order to return the JWT Token of the user provided
+     *
+     * Implements: POST https://api.immail.com.br/auth/token
+     * body: {
+     *     email: USER_EMAIL
+     * }
+     * headers: {
+     *     X-AUTH-TOKEN: IMMAIL_API_KEY
+     * }
+     */
+    public String createAuthToken(String email) {
+        HttpURLConnection connection = null;
+        String inputLine;
+        StringBuffer response = new StringBuffer();
+        try {
+
+            String urlParameters = "{ \"email\": \"" + email + "\" }";
+            byte[] postData = urlParameters.getBytes(StandardCharsets.UTF_8);
+            int postDataLength = postData.length;
+            URL url = new URL(this.immailURL + this.immailCreateTokenPath);
+            connection = (HttpURLConnection) url.openConnection();
+            connection.setDoOutput(true);
+            connection.setUseCaches(false);
+            connection.setInstanceFollowRedirects(true);
+            connection.setRequestMethod("POST");
+            connection.setRequestProperty("Content-Type", "application/json");
+            connection.setRequestProperty("charset", "utf-8");
+            connection.setRequestProperty("Content-Length", Integer.toString(postDataLength));
+            connection.setRequestProperty("X-Auth-Token", this.immailApiKey);
+
+            connection.setUseCaches(false);
+            try (DataOutputStream wr = new DataOutputStream(connection.getOutputStream())) {
+                wr.write(postData);
+            }
+
+            if (connection.getResponseCode() == 200) {
+                // get response stream
+                BufferedReader in = new BufferedReader(
+                        new InputStreamReader(connection.getInputStream()));
+                // feed response into the StringBuilder
+                while ((inputLine = in.readLine()) != null) {
+                    response.append(inputLine);
+                }
+                in.close();
+                // Start parsing
+                JSONObject obj = new JSONObject(response.toString());
+                String token = obj.getJSONObject("data").getString("token");
+                return token;
+
+            } else {
+                return "";
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "";
         }
     }
 
