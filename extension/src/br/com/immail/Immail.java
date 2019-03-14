@@ -22,91 +22,25 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
-API implementation for Zimbra -> imMail..
+API implementation for Zimbra -> imMail...
 
-signOn
-https://zimbradev/service/extension/rocket?action=signOn
-This URL needs to be configured in Rocket Chat under
-Administration->Accounts->Iframe->API URL
-If the user is logged into Zimbra this
-url will return an auth token to Rocket to let the user login.
-
-redirect
-https://zimbradev/service/extension/rocket?action=redirect
-This URL needs to be configured in Rocket Chat under
-Administration->Accounts->Iframe->Iframe URL
-
-This implementation uses HTTP GET
-Administration->Accounts->Iframe->Api Method = GET
-
-Before enabling the IFrame auth on Rocket, make sure to
-create an Admin account first (usually this is done at initial
-setup). You can use these credentials to debug if needed,
-but they are also needed for Zimbra to perform its actions.
-
-After enabling IFrame auth, you can no longer log-in via
-the Rocket login page. You can either follow the steps here
-to promote an account created by Zimbra to have an admin role.
-https://rocket.chat/docs/administrator-guides/restoring-an-admin/
-OR
-You can create your own account first in Rocket before enabling
-the integration and promote that to admin. Aka user.example.com.
-
-Otherwise you may lock yourself out.
-
-
-You can debug using the following commands:
-
-createUser
-Create a new user in Zimbra, make sure to set givenName and sn,
-log in as that user in Zimbra, open a tab and point it to:
-https://yourzimbra/service/extension/rocket?action=createUser
-Creates users in Rocket chat based on their Zimbra account name.
-The Zimbra Account name is mapped to the username in Rocket Chat.
-(replacing @ with . so admin@example.com in Zimbra becomes
-admin.example.com in Rocket)
-
-Furthermore the users Zimbra givenName and sn (surname) are
-concatenated to the Name in Rocket. Email is email in both
-systems
-
-If it returns 500, perhaps the account already exists or your admin
-credentials configured in config.properties are wrong. Or the email
-address is already configured on Rocket.
-
-Try debug further with curl:
-
-#Get admin auth token
-curl https://beta.rocket.org:443/api/v1/login -d "username=adminUsername&password=adminPassword"
-#Copy paste from the output
-
-#create a user
-curl -H "X-Auth-Token: from above command" \
-     -H "X-User-Id: from above command" \
-     -H "Content-type:application/json" \
-     https://beta.rocket.org/api/v1/users.create \
-     -d '{"name": "My User Name", "email": "exampleuser@zimbra.com", "password": "dfbgdyE%^&456645", "username": "exampleuser.zimbra.com"}'
-
-
-Create a user token (used for login)
-curl -H "X-Auth-Token: from above command" \
-     -H "X-User-Id: from above command" \
-     -H "Content-type:application/json" \
-     https://beta.rocket.org:443/api/v1/users.createToken \
-     -d '{ "username": "exampleuser.zimbra.com" }'
-
-This command will tell you why the creation of a user failed.
 */
 
 package br.com.immail;
 
 
+import com.zimbra.cs.account.Account;
+import com.zimbra.cs.account.AuthToken;
+import com.zimbra.cs.account.Cos;
+import com.zimbra.cs.account.Provisioning;
 import com.zimbra.cs.extension.ExtensionHttpHandler;
 
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Set;
 
 public class Immail extends ExtensionHttpHandler {
 
@@ -150,11 +84,72 @@ public class Immail extends ExtensionHttpHandler {
      */
     @Override
     public void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
-        resp.setStatus(HttpServletResponse.SC_OK);
-        resp.setHeader("Content-Type", "text/html");
-        resp.getWriter().write("<html><head></head><body><div style=\"background-color:white;color:black;padding:10px\">Please <a target=\"_blank\" href=''>Log in</a>.</div></body>");
-        resp.getWriter().flush();
-        resp.getWriter().close();
+        String authTokenStr = null;
+        Account zimbraAccount = null;
+        //Just read a cos value to see if its a valid user
+        try {
+            Cookie[] cookies = req.getCookies();
+            for (int n = 0; n < cookies.length; n++) {
+                Cookie cookie = cookies[n];
+
+                if (cookie.getName().equals("ZM_AUTH_TOKEN")) {
+                    authTokenStr = cookie.getValue();
+                    break;
+                }
+            }
+
+            if (authTokenStr != null) {
+                AuthToken authToken = AuthToken.getAuthToken(authTokenStr);
+                Provisioning prov = Provisioning.getInstance();
+                zimbraAccount = Provisioning.getInstance().getAccountById(authToken.getAccountId());
+                Cos cos = prov.getCOS(zimbraAccount);
+                Set<String> allowedDomains = cos.getMultiAttrSet(Provisioning.A_zimbraProxyAllowedDomains);
+            } else {
+                responseWriter("unauthorized", resp, null);
+                return;
+            }
+
+        } catch (Exception ex) {
+            //crafted cookie? get out you.
+            ex.printStackTrace();
+            responseWriter("unauthorized", resp, null);
+            return;
+        }
+
+        String name = zimbraAccount.getName();
+        responseWriter("ok", resp, name);
+        return;
+
+    }
+
+    private void responseWriter(String action, HttpServletResponse resp, String message) {
+        try {
+            // this.initializeRocketAPI();
+            // resp.setHeader("Access-Control-Allow-Origin", this.rocketURL);
+            // resp.setHeader("Access-Control-Allow-Credentials", "true");
+            switch (action) {
+                case "ok":
+                    resp.setStatus(HttpServletResponse.SC_OK);
+                    if (message == null) {
+                        resp.getWriter().write("OK");
+                    } else {
+                        resp.getWriter().write(message);
+                    }
+                    break;
+                case "unauthorized":
+                    resp.setHeader("Content-Type", "text/html");
+                    resp.getWriter().write("<html><head></head><body><div style=\"background-color:white;color:black;padding:10px\">Unauthorized. Let's do something.</div></body>");
+                    break;
+                case "error":
+                    resp.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+                    resp.getWriter().write("The request did not succeed successfully.");
+                    break;
+            }
+            resp.getWriter().flush();
+            resp.getWriter().close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 }
