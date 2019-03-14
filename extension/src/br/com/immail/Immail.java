@@ -252,7 +252,7 @@ public class Immail extends ExtensionHttpHandler {
                 in.close();
                 // Start parsing
                 JSONObject obj = new JSONObject(response.toString());
-                String token = obj.getJSONObject("data").getString("token");
+                String token = obj.getString("token");
                 return token;
 
             } else {

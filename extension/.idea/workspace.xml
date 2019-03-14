@@ -7,9 +7,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e1620784-f2a3-4d61-b2f8-c556fb82b700" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/extension_jar/extension.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/extension/br/com/immail/Immail.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/br/com/immail/Immail.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/br/com/immail/Immail.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -30,8 +27,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/br/com/immail/Immail.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="117">
-              <caret line="123" lean-forward="true" selection-start-line="123" selection-end-line="123" />
+            <state relative-caret-position="467">
+              <caret line="254" column="54" lean-forward="true" selection-start-line="254" selection-start-column="54" selection-end-line="254" selection-end-column="54" />
               <folding>
                 <element signature="e#0#5750#0" expanded="true" />
                 <element signature="imports" expanded="true" />
@@ -195,7 +192,7 @@
       <window_info id="UI Designer" order="4" />
       <window_info id="Capture Tool" order="5" />
       <window_info id="Favorites" order="6" side_tool="true" />
-      <window_info active="true" anchor="bottom" id="Messages" visible="true" weight="0.32884902" />
+      <window_info anchor="bottom" id="Messages" weight="0.32884902" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
       <window_info anchor="bottom" id="Run" order="2" />
@@ -285,8 +282,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/br/com/immail/Immail.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="117">
-          <caret line="123" lean-forward="true" selection-start-line="123" selection-end-line="123" />
+        <state relative-caret-position="467">
+          <caret line="254" column="54" lean-forward="true" selection-start-line="254" selection-start-column="54" selection-end-line="254" selection-end-column="54" />
           <folding>
             <element signature="e#0#5750#0" expanded="true" />
             <element signature="imports" expanded="true" />
