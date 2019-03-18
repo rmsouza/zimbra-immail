@@ -66,9 +66,10 @@ ZimbraImmailZimlet.prototype.sso = function() {
       if (xhr.readyState === 4) {
         if (xhr.status === 200) {
           console.log(xhr);
-          console.log(xhr.response);
           var response = JSON.parse(xhr.response);
-          zimletInstance.token = response.token;
+          console.log(response);
+          console.log(response.token);
+          zimletInstance.immailAuthToken = response.token;
           return true;
         }
       }
@@ -84,7 +85,7 @@ ZimbraImmailZimlet.prototype.loadIframe = function() {
   try {
     var zimletInstance = appCtxt._zimletMgr.getZimletByName('br_com_immail').handlerObject;
     var iframeURL = zimletInstance.iframeURL;
-    var token = zimletInstance.token;
+    var token = zimletInstance.immailAuthToken;
 
     zimletInstance.ZimbraImmailApp = zimletInstance.createApp(zimletInstance.appName, "", zimletInstance.appDescription);
     var app = appCtxt.getApp(zimletInstance.ZimbraImmailApp);
