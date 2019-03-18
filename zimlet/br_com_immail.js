@@ -28,7 +28,7 @@ ZimbraImmailZimlet.prototype.init = function() {
   zimletInstance.appName = zimletInstance._zimletContext.getConfig("appName");
   zimletInstance.appDescription = zimletInstance._zimletContext.getConfig("appDescription");
 
-  ZimbraImmailZimlet.prototype.sso();
+  zimletInstance.immailAuthToken = ZimbraImmailZimlet.prototype.sso();
 
   ZimbraImmailZimlet.prototype.loadIframe();
 
@@ -50,8 +50,6 @@ ZimbraImmailZimlet.prototype.appLaunch = function(appName) {
 };
 
 ZimbraImmailZimlet.prototype.sso = function() {
-  var zimletInstance = appCtxt._zimletMgr.getZimletByName('br_com_immail').handlerObject;
-
   try {
     var xhr = new XMLHttpRequest();
     xhr.open('GET', '/service/extension/immail?action=signOn');
@@ -65,12 +63,9 @@ ZimbraImmailZimlet.prototype.sso = function() {
     xhr.onreadystatechange = function (oEvent) {
       if (xhr.readyState === 4) {
         if (xhr.status === 200) {
-          console.log(xhr);
           var response = JSON.parse(xhr.response);
-          console.log(response);
           console.log(response.token);
-          zimletInstance.immailAuthToken = response.token;
-          return true;
+          return response.token;
         }
       }
     }
