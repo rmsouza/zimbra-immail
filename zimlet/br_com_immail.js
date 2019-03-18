@@ -23,10 +23,16 @@ var ZimbraImmailZimlet = br_com_immail_HandlerObject;
 * This method gets called by the Zimlet framework when the zimlet loads.
 */
 ZimbraImmailZimlet.prototype.init = function() {
-  console.log('load zimlet');
-  this._simpleAppName = this.createApp("imMail App", "zimbraIcon", "imMail - Professional messaging app");
+  this._simpleAppName = this.createApp(zimletInstance._zimletContext.getConfig("appName"), "zimbraIcon", zimletInstance._zimletContext.getConfig("appDescription"));
 
-  ZimbraImmailZimlet.prototype.testRequest();
+  var app = appCtxt.getApp(appName); // get access to ZmZimletApp
+  var zimletInstance = appCtxt._zimletMgr.getZimletByName('br_com_immail').handlerObject;
+  zimletInstance.iframeURL = zimletInstance._zimletContext.getConfig("iframeURL");
+
+  if (ZimbraImmailZimlet.prototype.sso()) {
+    ZimbraImmailZimlet.prototype.loadIframe();
+  }
+
 };
 
 /**
@@ -38,37 +44,44 @@ ZimbraImmailZimlet.prototype.appLaunch = function(appName) {
   console.log('opened for the first time');
   switch (appName) {
     case this._simpleAppName: {
-      // do something
-      var app = appCtxt.getApp(appName); // get access to ZmZimletApp
-      var iframeURL = this._zimletContext.getConfig('iframeURL');
-      app.setContent("<iframe id=\"tabiframe-app\" name=\"tabiframe-app\" src=\"" + iframeURL + "\" width=\"100%\" height=\"100%\" /></iframe>"); // write HTML to app
+
       break;
     }
   }
 };
 
-ZimbraImmailZimlet.prototype.testRequest = function()
-{
-   var zimletInstance = appCtxt._zimletMgr.getZimletByName('br_com_immail').handlerObject;
-   try{
-      var xhr = new XMLHttpRequest();
-      xhr.open('GET', '/service/extension/immail');
+ZimbraImmailZimlet.prototype.sso = function() {
+  var zimletInstance = appCtxt._zimletMgr.getZimletByName('br_com_immail').handlerObject;
 
-      xhr.onerror = function (err) {
-         console.log(err);
-      };
+  try {
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', '/service/extension/immail');
 
-      xhr.send();
-      xhr.onreadystatechange = function (oEvent)
-      {
-         console.log('xhr');
-         if (xhr.readyState === 4)
-         {
-            console.log(xhr.status);
-            console.log(xhr.response);
-         }
-      }
-   } catch (err) {
+    xhr.onerror = function (err) {
       console.log(err);
-   }
+      return false;
+    };
+
+    xhr.send();
+    xhr.onreadystatechange = function (oEvent) {
+      if (xhr.readyState === 4) {
+        if (xhr.status === 200) {
+          console.log(xhr);
+          console.log(xhr.response);
+          zimletInstance.token = xhr.response.token;
+          return true;
+        }
+      }
+    }
+  } catch (err) {
+    console.log(err);
+    return false;
+  }
+};
+
+ZimbraImmailZimlet.prototype.loadIframe = function() {
+  var zimletInstance = appCtxt._zimletMgr.getZimletByName('br_com_immail').handlerObject;
+  var iframeURL = zimletInstance.iframeURL;
+  var token = zimletInstance.token;
+  app.setContent("<iframe id=\"tabiframe-app\" name=\"tabiframe-app\" src=\"" + iframeURL + "?token=" + token + "\" width=\"100%\" height=\"100%\" /></iframe>"); // write HTML to app
 };
