@@ -67,7 +67,8 @@ ZimbraImmailZimlet.prototype.sso = function() {
         if (xhr.status === 200) {
           console.log(xhr);
           console.log(xhr.response);
-          zimletInstance.token = xhr.response.token;
+          var response = JSON.parse(xhr.response);
+          zimletInstance.token = response.token;
           return true;
         }
       }
