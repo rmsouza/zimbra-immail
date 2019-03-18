@@ -23,6 +23,7 @@ var ZimbraImmailZimlet = br_com_immail_HandlerObject;
 * This method gets called by the Zimlet framework when the zimlet loads.
 */
 ZimbraImmailZimlet.prototype.init = function() {
+  console.log('load zimlet');
   this._simpleAppName = this.createApp("imMail App", "zimbraIcon", "imMail - Professional messaging app");
 
   ZimbraImmailZimlet.prototype.testRequest();
@@ -34,6 +35,7 @@ ZimbraImmailZimlet.prototype.init = function() {
 * @param	{String}	appName		the application name
 */
 ZimbraImmailZimlet.prototype.appLaunch = function(appName) {
+  console.log('opened for the first time');
   switch (appName) {
     case this._simpleAppName: {
       // do something

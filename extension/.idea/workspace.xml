@@ -6,9 +6,7 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e1620784-f2a3-4d61-b2f8-c556fb82b700" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/src/br/com/immail/Immail.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/br/com/immail/Immail.java" afterDir="false" />
-    </list>
+    <list default="true" id="e1620784-f2a3-4d61-b2f8-c556fb82b700" name="Default Changelist" comment="" />
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -27,8 +25,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/br/com/immail/Immail.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="467">
-              <caret line="254" column="54" lean-forward="true" selection-start-line="254" selection-start-column="54" selection-end-line="254" selection-end-column="54" />
+            <state relative-caret-position="407">
+              <caret line="250" column="17" lean-forward="true" selection-start-line="250" selection-start-column="17" selection-end-line="250" selection-end-column="17" />
               <folding>
                 <element signature="e#0#5750#0" expanded="true" />
                 <element signature="imports" expanded="true" />
@@ -182,10 +180,9 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-1" y="-11" width="1362" height="780" extended-state="6" />
-    <editor active="true" />
+    <frame x="-1" y="-11" width="1368" height="780" extended-state="6" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.11719939" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.11666667" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -282,8 +279,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/br/com/immail/Immail.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="467">
-          <caret line="254" column="54" lean-forward="true" selection-start-line="254" selection-start-column="54" selection-end-line="254" selection-end-column="54" />
+        <state relative-caret-position="407">
+          <caret line="250" column="17" lean-forward="true" selection-start-line="250" selection-start-column="17" selection-end-line="250" selection-end-column="17" />
           <folding>
             <element signature="e#0#5750#0" expanded="true" />
             <element signature="imports" expanded="true" />
