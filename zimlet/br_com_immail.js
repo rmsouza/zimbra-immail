@@ -90,3 +90,47 @@ ZimbraImmailZimlet.prototype.loadIframe = function() {
   } catch (err) { console.log (err)}
 
 };
+
+ZimbraRocketZimlet.prototype.appActive = function(appName, active) {
+  var zimletInstance = appCtxt._zimletMgr.getZimletByName('br_com_immail').handlerObject;
+
+  if (active) {
+    console.log('app active');
+
+    document.title = 'Zimbra: ' + 'imMail';
+    //In the Zimbra tab hide the left menu bar that is displayed by default in Zimbra, also hide the mini calendar
+    document.getElementById('z_sash').style.display = "none";
+    //Users that click the tab directly after logging in, will still be served with the calendar, as it is normal
+    //it takes some time to be displayed, so if that occurs, try to remove the calender again after 10 seconds.
+    try {
+      var cal = document.getElementsByClassName("DwtCalendar");
+      cal[0].style.display = "none";
+    } catch (err) {
+      setTimeout(
+        function(){
+          try {
+            var cal = document.getElementsByClassName("DwtCalendar"); cal[0].style.display = "none";
+          }
+          catch(err){}
+        }, 10000);
+      }
+
+      var app = appCtxt.getApp(zimletInstance.ZimbraImmailApp);
+      var overview = app.getOverview(); // returns ZmOverview
+      overview.setContent("&nbsp;");
+      try {
+        var child = document.getElementById(overview._htmlElId);
+        child.parentNode.removeChild(child);
+      } catch(err) {
+        // already gone
+      }
+    } else {
+      console.log('app inactive');
+
+      document.getElementById('z_sash').style.display = "block";
+      try {
+        var cal = document.getElementsByClassName("DwtCalendar");
+        cal[0].style.display = "block";
+      } catch (err) { }
+    }
+  };
