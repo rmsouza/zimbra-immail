@@ -39,7 +39,7 @@ ZimbraImmailZimlet.prototype.init = function() {
 */
 ZimbraImmailZimlet.prototype.appLaunch = function(appName) {
   console.log('opened for the first time.. reloading iframe');
-  window.frames['iframe-immail-app'].location.reload();
+  ZimbraImmailZimlet.prototype.loadIframe();
 };
 
 ZimbraImmailZimlet.prototype.sso = function() {
