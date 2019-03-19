@@ -38,13 +38,8 @@ ZimbraImmailZimlet.prototype.init = function() {
 * @param	{String}	appName		the application name
 */
 ZimbraImmailZimlet.prototype.appLaunch = function(appName) {
-  switch (appName) {
-    case this._simpleAppName: {
-      console.log('opened for the first time.. reloading iframe');
-      window.frames['iframe-immail-app'].location.reload();
-      break;
-    }
-  }
+  console.log('opened for the first time.. reloading iframe');
+  window.frames['iframe-immail-app'].location.reload();
 };
 
 ZimbraImmailZimlet.prototype.sso = function() {
