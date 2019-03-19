@@ -28,9 +28,7 @@ ZimbraImmailZimlet.prototype.init = function() {
   zimletInstance.appName = zimletInstance._zimletContext.getConfig("appName");
   zimletInstance.appDescription = zimletInstance._zimletContext.getConfig("appDescription");
 
-  ZimbraImmailZimlet.prototype.sso(function () {
-    ZimbraImmailZimlet.prototype.loadIframe();
-  });
+  ZimbraImmailZimlet.prototype.sso();
 
 };
 
@@ -67,6 +65,8 @@ ZimbraImmailZimlet.prototype.sso = function() {
           var response = JSON.parse(xhr.response);
           console.log(response.token);
           zimletInstance.immailAuthToken = response.token;
+
+          ZimbraImmailZimlet.prototype.loadIframe();
           return true;
         }
       }
@@ -78,7 +78,7 @@ ZimbraImmailZimlet.prototype.sso = function() {
 };
 
 ZimbraImmailZimlet.prototype.loadIframe = function() {
-
+  console.log('load iframe....');
   try {
     var zimletInstance = appCtxt._zimletMgr.getZimletByName('br_com_immail').handlerObject;
     var iframeURL = zimletInstance.iframeURL;
