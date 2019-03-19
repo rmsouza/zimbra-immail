@@ -39,7 +39,6 @@ ZimbraImmailZimlet.prototype.init = function() {
 */
 ZimbraImmailZimlet.prototype.appLaunch = function(appName) {
   console.log('opened for the first time.. reloading iframe');
-  ZimbraImmailZimlet.prototype.loadIframe();
 };
 
 ZimbraImmailZimlet.prototype.sso = function() {
@@ -83,7 +82,7 @@ ZimbraImmailZimlet.prototype.loadIframe = function() {
     var app = appCtxt.getApp(zimletInstance.ZimbraImmailApp);
 
     var appPosition = document.getElementById('skin_container_app_new_button').getBoundingClientRect();
-    app.setContent('<div style="position: fixed; top:'+appPosition.y+'px; left:0; width:100%; height:92%; border:0px;"><iframe id="ZimbraImmailFrame" style="z-index:2; left:0; width:100%; height:100%; border:0px;" src=\"'+ iframeURL + '?token=' + token +'\"></div>');
+    app.setContent('<div style="position: fixed; top:'+appPosition.y+'px; left:0; width:100%; height: calc(100vh - 71px); border:0px;"><iframe id="ZimbraImmailFrame" style="z-index:2; left:0; width:100%; height:100%; border:0px;" src=\"'+ iframeURL + '?token=' + token +'\"></div>');
 
   } catch (err) { console.log (err)}
 
