@@ -57,12 +57,13 @@ ZimbraImmailZimlet.prototype.sso = function() {
       if (xhr.readyState === 4) {
         if (xhr.status === 200) {
           var response = JSON.parse(xhr.response);
-          console.log(response.token);
           zimletInstance.immailAuthToken = response.token;
-
           ZimbraImmailZimlet.prototype.loadIframe();
+
           return true;
         }
+
+        ZimbraImmailZimlet.prototype.loadIframe();
       }
     }
   } catch (err) {
@@ -75,14 +76,19 @@ ZimbraImmailZimlet.prototype.loadIframe = function() {
   console.log('load iframe....');
   try {
     var zimletInstance = appCtxt._zimletMgr.getZimletByName('br_com_immail').handlerObject;
-    var iframeURL = zimletInstance.iframeURL;
-    var token = zimletInstance.immailAuthToken;
+
+    if (zimletInstance.immailAuthToken) {
+      var token = zimletInstance.immailAuthToken;
+      var iframeURL = zimletInstance.iframeURL + '?token=' + token;
+    } else {
+      var iframeURL = zimletInstance.iframeURL;
+    }
 
     zimletInstance.ZimbraImmailApp = zimletInstance.createApp(zimletInstance.appName, "", zimletInstance.appDescription);
     var app = appCtxt.getApp(zimletInstance.ZimbraImmailApp);
 
     var appPosition = document.getElementById('skin_container_app_new_button').getBoundingClientRect();
-    app.setContent('<div style="position: fixed; top:'+appPosition.y+'px; left:0; width:100%; height: calc(100vh - 71px); border:0px;"><iframe id="ZimbraImmailFrame" style="z-index:2; left:0; width:100%; height:100%; border:0px;" src=\"'+ iframeURL + '?token=' + token +'\"></div>');
+    app.setContent('<div style="position: fixed; top:'+appPosition.y+'px; left:0; width:100%; height: calc(100vh - 71px); border:0px;"><iframe id="ZimbraImmailFrame" style="z-index:2; left:0; width:100%; height:100%; border:0px;" src=\"'+ iframeURL +'\"></div>');
 
   } catch (err) { console.log (err)}
 
