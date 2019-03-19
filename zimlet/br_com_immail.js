@@ -38,10 +38,10 @@ ZimbraImmailZimlet.prototype.init = function() {
 * @param	{String}	appName		the application name
 */
 ZimbraImmailZimlet.prototype.appLaunch = function(appName) {
-  console.log('opened for the first time');
   switch (appName) {
     case this._simpleAppName: {
-
+      console.log('opened for the first time.. reloading iframe');
+      window.frames['iframe-immail-app'].location.reload();
       break;
     }
   }
@@ -90,7 +90,7 @@ ZimbraImmailZimlet.prototype.loadIframe = function() {
     // var appPosition = document.getElementById('skin_container_app_new_button').getBoundingClientRect();
     // app.setContent('<div style="position: fixed; top:'+appPosition.y+'px; left:0; width:100%; height:92%; border:0px;"><iframe id="ZimbraRocketFrame" style="z-index:2; left:0; width:100%; height:100%; border:0px;" src=\"'+zimletInstance._zimletContext.getConfig("rocketurl")+'\"></div>');
 
-    app.setContent("<iframe id=\"tabiframe-app\" name=\"tabiframe-app\" src=\"" + iframeURL + "?token=" + token + "\" width=\"100%\" height=\"100%\" /></iframe>"); // write HTML to app
+    app.setContent("<iframe id=\"iframe-immail-app\" name=\"iframe-immail-app\" src=\"" + iframeURL + "?token=" + token + "\" width=\"100%\" height=\"100%\" /></iframe>"); // write HTML to app
 
   } catch (err) { console.log (err)}
 
