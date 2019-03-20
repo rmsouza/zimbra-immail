@@ -29,22 +29,33 @@ immailCreateTokenPath=/auth/token
 3. Restart Zimbra Server:
 
 ```
-$ zmcontrol restart
+$ zmmailboxdctl restart
 ```
 
+## Basic Integration
+
+1. Download the _br_com_immail.zip_ file into the server.
+2. Change to zimbra user.
+
 ```
-cd zimbra-immail/zimlet
-
-zip br_com_immail.zip *
-
 su zimbra
+```
+3. Execute the deploy command:
 
+```
 zmzimletctl deploy br_com_immail.zip
+```
+4. Grant permission to imMail domains.
 
+```
 zmprov mc default +zimbraProxyAllowedDomains *.immail.com.br
 ```
+5. Clean up the Zimlet cache.
 
-  ## After update the zimlet may be you have to clean the cache
-`
+After update the zimlet may be you have to clean up the cache
+
+```
  zmprov flushCache zimlet
-`
+```
+
+## Enjoy it!
