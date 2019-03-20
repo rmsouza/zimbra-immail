@@ -57,5 +57,6 @@ After update the zimlet may be you have to clean up the cache
 ```
  zmprov flushCache zimlet
 ```
+6. Make sure Zimlet is active for users.
 
 ## Enjoy it!
