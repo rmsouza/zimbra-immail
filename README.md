@@ -3,27 +3,33 @@ Here you will find important instructions to install a Zimlet that makes possibl
 
 # Installation
 
-## Single signon integration
+## Single Sign-on Integration
 This Zimlet supports optional single sign-on to imMail using the imMail API. That way you only need to maintain the user accounts on Zimbra. The account creation can be done via LDAP import or by the own user on imMail platform, but in both of cases, you will still log them on automatically (single sign-on integration). Or you can just deploy only the Zimlet and let the user decide on the authentication (basic integration).
 
-1. Clone o repositório do Zimlet.
+> If you do not want to activate the Single Sign-on option,  skip this step and go straight to the Basic Integration.
+
+1. For Single Sign-on Integration you have to set-up the Java server extension. Download the extension.jar file and copy it to _/opt/zimbra/lib/ext/immail/extension.jar_
+
+Probably you will need to create the _immail_ folder in _/opt/zimbra/lib/ext_. See the example below:
+
 ```
-git clone https://github.com/myinfoshare-user/zimbra-immail.git
+$ mkdir /opt/zimbra/lib/ext/immail
+$ cp extension.jar /opt/zimbra/lib/ext/immail/extension.jar
 ```
-2. Copiar arquivo extension.jar
+
+2. Then create the _config.properties_ text file in _/opt/zimbra/lib/ext/immail/config.properties_ with the contents:
+
 ```
-mkdir /opt/zimbra/lib/ext/immail
-cp zimbra-immail/extension/out/artifacts/extension_jar/extension.jar /opt/zimbra/lib/ext/immail/extension.jar
-```
-3. Crie um arquivo de configuração chamado "config.properties" como no exemplo abaixo:
-```
-# vi /opt/zimbra/lib/ext/immail/config.properties
-```
-Insira o seguinte conteúdo no arquivo:
-```
-immailApiKey=API_KEY (Fornecida pela imMail)
+immailApiKey={API_KEY} (Provided by imMail)
 immailURL=https://api.immail.com.br
 immailCreateTokenPath=/auth/token
+```
+> Do not forget to replace the {API_KEY} text by the value that was provided by the imMail team. If you have no the API_KEY, please, contact us via imMail App (support@immail.com.br).
+
+3. Restart Zimbra Server:
+
+```
+$ zmcontrol restart
 ```
 
 ```
