@@ -107,15 +107,20 @@ ZimbraImmailZimlet.prototype.appActive = function(appName, active) {
     //it takes some time to be displayed, so if that occurs, try to remove the calender again after 10 seconds.
     try {
       var cal = document.getElementsByClassName("DwtCalendar");
+      var chat = document.getElementsByClassName("DwtBaseDialog");
       cal[0].style.display = "none";
+      chat[0].style.display = "none";
     } catch (err) {
       setTimeout(
         function(){
           try {
-            var cal = document.getElementsByClassName("DwtCalendar"); cal[0].style.display = "none";
+            var cal = document.getElementsByClassName("DwtCalendar");
+            var chat = document.getElementsByClassName("DwtBaseDialog");
+            cal[0].style.display = "none";
+            chat[0].style.display = "none";
           }
           catch(err){}
-        }, 10000);
+        }, 5000);
       }
 
       var app = appCtxt.getApp(zimletInstance.ZimbraImmailApp);
@@ -133,7 +138,9 @@ ZimbraImmailZimlet.prototype.appActive = function(appName, active) {
       document.getElementById('z_sash').style.display = "block";
       try {
         var cal = document.getElementsByClassName("DwtCalendar");
+        var chat = document.getElementsByClassName("DwtBaseDialog");
         cal[0].style.display = "block";
+        chat[0].style.display = "block";
       } catch (err) { }
     }
   };
