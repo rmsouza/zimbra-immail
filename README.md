@@ -1,8 +1,10 @@
-# Zimbra and imMail integration
+# Zimbra and imMail Integration
+Here you will find important instructions to install a Zimlet that makes possible the integration between Zimbra Collaboration Server and imMail (Instant Messenger for Companies), and make an amazing integration with both inside the Zimbra Web Client.
 
 # Installation
 
-Estando no servidor onde o Zimbra encontra-se instalado:
+## Single signon integration
+This Zimlet supports optional single sign-on to imMail using the imMail API. That way you only need to maintain the user accounts on Zimbra. The account creation can be done via LDAP import or by the own user on imMail platform, but in both of cases, you will still log them on automatically (single sign-on integration). Or you can just deploy only the Zimlet and let the user decide on the authentication (basic integration).
 
 1. Clone o repositório do Zimlet.
 ```
