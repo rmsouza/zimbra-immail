@@ -151,19 +151,22 @@ ZimbraImmailZimlet.prototype.setEventListeners = function() {
   console.log('setting event listeners');
 
   var zimletInstance = appCtxt._zimletMgr.getZimletByName('br_com_immail').handlerObject;
+  var iframeURL = zimletInstance._zimletContext.getConfig("iframeURL");
+
   window.addEventListener('message', receiveMessage, false);
 
   function receiveMessage(event) {
-    if (event.origin === zimletInstance.iframeURL) {
-      console.log('orgin match', zimletInstance.iframeURL);
+    if (event.origin != iframeURL) {
+      console.log('origin not match', iframeURL + ' - ' + event.origin);
+      return false;
     } else {
-      console.log('origin not match', zimletInstance.iframeURL + ' - ' + event.origin);
+      console.log('orgin match', iframeURL);
     }
 
     switch (event.data.type) {
       case 'unread-messages':
         if (event.data.count > 0) {
-          var label = zimletInstance.appName + '(' + event.data.count + ')';
+          var label = zimletInstance.appName + ' (' + event.data.count + ')';
         } else {
           var label = zimletInstance.appName;
         }
@@ -171,7 +174,7 @@ ZimbraImmailZimlet.prototype.setEventListeners = function() {
         ZimbraImmailZimlet.prototype.setTabLabel(label);
         break;
       default:
-        console.log('unknown event');
+        console.log('unknown event: ', event);
     }
   }
 }
@@ -182,10 +185,6 @@ ZimbraImmailZimlet.prototype.setTabLabel = function(label) {
   var controller = appCtxt.getAppController();
   var appChooser = controller.getAppChooser();
 
-  // change the tab label and tool tip
-  var appButton = appChooser.getButton(zimletInstance.ZimbraImmailApp); // returns ZmAppButton
-  console.log(zimletInstance.ZimbraImmailApp);
-  console.log(appButton);
+  var appButton = appChooser.getButton(zimletInstance.ZimbraImmailApp);
   appButton.setText(label);
-  // appButton.setToolTipContent("NEW TAB TOOL TIP");
 };
