@@ -60,3 +60,10 @@ After update the zimlet may be you have to clean up the cache
 6. Make sure Zimlet is active for users.
 
 ## Enjoy it!
+
+## Important Notes
+
+**Nothing has been presented into the imMail tab.**
+If someone has been a problem like this on Chrome, the browser can be blocking third-party cookies.
+
+To find the setting, open Chrome settings, type "third" in the search box, click the Content Settings button, and view the fourth item under Cookies.
