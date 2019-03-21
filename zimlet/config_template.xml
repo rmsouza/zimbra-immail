@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<zimletConfig name="br_com_immail" version="0.0.3">
+<zimletConfig name="br_com_immail" version="0.0.4">
   <global>
-    <property name="iframeURL">https://testapp.immail.com.br/#!/login</property>
+    <property name="iframeURL">https://testapp.immail.com.br</property>
     <property name="appName">imMail</property>
     <property name="appDescription">Instant Messenger for Companies</property>
   </global>

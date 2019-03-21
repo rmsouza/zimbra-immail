@@ -81,9 +81,9 @@ ZimbraImmailZimlet.prototype.loadIframe = function() {
 
     if (zimletInstance.immailAuthToken) {
       var token = zimletInstance.immailAuthToken;
-      var iframeURL = zimletInstance.iframeURL + '?token=' + token;
+      var iframeURL = zimletInstance.iframeURL + '/#!/login?token=' + token;
     } else {
-      var iframeURL = zimletInstance.iframeURL;
+      var iframeURL = zimletInstance.iframeURL + '/#!/login';
     }
 
     zimletInstance.ZimbraImmailApp = zimletInstance.createApp(zimletInstance.appName, "", zimletInstance.appDescription);
@@ -148,10 +148,8 @@ ZimbraImmailZimlet.prototype.appActive = function(appName, active) {
   };
 
 ZimbraImmailZimlet.prototype.setEventListeners = function() {
-  console.log('setting event listeners');
-
   var zimletInstance = appCtxt._zimletMgr.getZimletByName('br_com_immail').handlerObject;
-  var iframeURL = zimletInstance._zimletContext.getConfig("iframeURL");
+  var iframeURL = zimletInstance.iframeURL;
 
   window.addEventListener('message', receiveMessage, false);
 
@@ -159,14 +157,12 @@ ZimbraImmailZimlet.prototype.setEventListeners = function() {
     if (event.origin != iframeURL) {
       console.log('origin not match', iframeURL + ' - ' + event.origin);
       return false;
-    } else {
-      console.log('orgin match', iframeURL);
     }
 
     switch (event.data.type) {
       case 'unread-messages':
         if (event.data.count > 0) {
-          var label = zimletInstance.appName + ' (' + event.data.count + ')';
+          var label = zimletInstance.appName + ' <b>(' + event.data.count + ')</b>';
         } else {
           var label = zimletInstance.appName;
         }
