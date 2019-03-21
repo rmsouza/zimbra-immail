@@ -66,4 +66,6 @@ After update the zimlet may be you have to clean up the cache
 **Nothing has been presented into the imMail tab.**
 If someone has been a problem like this on Chrome, the browser can be blocking third-party cookies.
 
-To find the setting, open Chrome settings, type "third" in the search box, click the Content Settings button, and view the fourth item under Cookies.
+To find the setting, open Chrome settings, type "content" in the search box, click the Content Settings option, then click the Cookies option and uncheck the option that says something like this "Block third-party cookies and site data".
+
+Click [here](https://www.chromium.org/for-testers/bug-reporting-guidelines/uncaught-securityerror-failed-to-read-the-localstorage-property-from-window-access-is-denied-for-this-document) for more info.
