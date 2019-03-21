@@ -63,6 +63,8 @@ ZimbraImmailZimlet.prototype.sso = function() {
           return true;
         }
 
+        ZimbraImmailZimlet.prototype.setEventListeners();
+
         ZimbraImmailZimlet.prototype.loadIframe();
       }
     }
@@ -144,3 +146,40 @@ ZimbraImmailZimlet.prototype.appActive = function(appName, active) {
       } catch (err) { }
     }
   };
+
+ZimbraImmailZimlet.prototype.setEventListeners = function() {
+  var zimletInstance = appCtxt._zimletMgr.getZimletByName('br_com_immail').handlerObject;
+  window.addEventListener('message', receiveMessage, false);
+
+  function receiveMessage(event) {
+    if (event.origin === zimletInstance.iframeURL) {
+      console.log('orgin match', zimletInstance.iframeURL);
+    } else {
+      console.log('origin not match', zimletInstance.iframeURL + ' - ' + event.origin);
+    }
+
+    switch (event.data.type) {
+      case 'unread-messages':
+        if (event.data.count > 0) {
+          var label = zimletInstance.appName + '(' + event.data.count + ')';
+        } else {
+          var label = zimletInstance.appName;
+        }
+
+        ZimbraImmailZimlet.prototype.setTabLabel(label);
+        break;
+      default:
+        console.log('unknown event');
+    }
+  }
+}
+
+ZimbraImmailZimlet.prototype.setTabLabel = function(label) {
+  var controller = appCtxt.getAppController();
+  var appChooser = controller.getAppChooser();
+
+  // change the tab label and tool tip
+  var appButton = appChooser.getButton(this._tabAppName); // returns ZmAppButton
+  appButton.setText(label);
+  // appButton.setToolTipContent("NEW TAB TOOL TIP");
+};
