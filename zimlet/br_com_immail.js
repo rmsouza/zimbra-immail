@@ -178,14 +178,13 @@ ZimbraImmailZimlet.prototype.setEventListeners = function() {
 
 ZimbraImmailZimlet.prototype.setTabLabel = function(label) {
   var zimletInstance = appCtxt._zimletMgr.getZimletByName('br_com_immail').handlerObject;
-  var app = appCtxt.getApp(zimletInstance.ZimbraImmailApp);
 
   var controller = appCtxt.getAppController();
   var appChooser = controller.getAppChooser();
 
   // change the tab label and tool tip
-  var appButton = appChooser.getButton(this._tabAppName); // returns ZmAppButton
-  console.log(this._tabAppName);
+  var appButton = appChooser.getButton(zimletInstance.ZimbraImmailApp); // returns ZmAppButton
+  console.log(zimletInstance.ZimbraImmailApp);
   console.log(appButton);
   appButton.setText(label);
   // appButton.setToolTipContent("NEW TAB TOOL TIP");
