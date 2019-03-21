@@ -28,6 +28,8 @@ ZimbraImmailZimlet.prototype.init = function() {
   zimletInstance.appName = zimletInstance._zimletContext.getConfig("appName");
   zimletInstance.appDescription = zimletInstance._zimletContext.getConfig("appDescription");
 
+  ZimbraImmailZimlet.prototype.setEventListeners();
+
   ZimbraImmailZimlet.prototype.sso();
 
 };
@@ -62,8 +64,6 @@ ZimbraImmailZimlet.prototype.sso = function() {
 
           return true;
         }
-
-        ZimbraImmailZimlet.prototype.setEventListeners();
 
         ZimbraImmailZimlet.prototype.loadIframe();
       }
