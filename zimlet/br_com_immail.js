@@ -148,6 +148,8 @@ ZimbraImmailZimlet.prototype.appActive = function(appName, active) {
   };
 
 ZimbraImmailZimlet.prototype.setEventListeners = function() {
+  console.log('setting event listeners');
+
   var zimletInstance = appCtxt._zimletMgr.getZimletByName('br_com_immail').handlerObject;
   window.addEventListener('message', receiveMessage, false);
 
