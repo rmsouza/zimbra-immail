@@ -50,6 +50,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
 import java.util.Set;
+import java.util.Arrays;
 
 public class Immail extends ExtensionHttpHandler {
 
@@ -151,31 +152,9 @@ public class Immail extends ExtensionHttpHandler {
                     break;
                 case "test":
                     try {
-                        JSONParser jsonParser = new JSONParser();
-                        FileReader reader = new FileReader("/opt/zimbra/lib/ext/immail/config.domains.json");
-                        Object obj = jsonParser.parse(reader);
-                        JSONArray domainArray = (JSONArray) obj;
-                        // JSONObject firstDomain = domainList.getJSONObject(0);
+                        String apiKeyStr = getApiKey(zimbraAccount.getName());
 
-                        final String domains[] = new String[] { "" };
-                        domainArray.forEach( emp -> {
-                            try {
-                                JSONObject domainObj = (JSONObject) emp;
-                                String domain = (String) domainObj.get("domain");
-                                String apiKey = (String) domainObj.get("apiKey");
-
-                                System.out.println("domain : " + domain);
-                                System.out.println("apiKey : " + apiKey);
-
-                                domains[0] += domain;
-                            } catch (Exception ex) {
-                                ex.printStackTrace();
-                                responseWriter("unauthorized", resp, null);
-                                return;
-                            }
-                        });
-
-                        responseWriter("ok", resp, domains[0]);
+                        responseWriter("ok", resp, apiKeyStr);
                     } catch (Exception ex) {
                         ex.printStackTrace();
                         responseWriter("unauthorized", resp, null);
@@ -239,7 +218,12 @@ public class Immail extends ExtensionHttpHandler {
     }
 
     public String getApiKey (String email) {
+        System.out.println(email);
+
         String[] arrOfStr = email.split("@");
+
+        System.out.println(Arrays.toString(email.split("@")));
+
         String currentDomain = arrOfStr[1];
 
         try {
