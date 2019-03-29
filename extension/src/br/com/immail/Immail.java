@@ -34,8 +34,8 @@ import com.zimbra.cs.account.AuthToken;
 import com.zimbra.cs.account.Cos;
 import com.zimbra.cs.account.Provisioning;
 import com.zimbra.cs.extension.ExtensionHttpHandler;
-import org.json.JSONArray;
 import org.json.JSONObject;
+import org.json.simple.JSONArray;
 import org.json.simple.parser.JSONParser;
 
 import javax.servlet.ServletException;
@@ -157,19 +157,25 @@ public class Immail extends ExtensionHttpHandler {
                         JSONArray domainArray = (JSONArray) obj;
                         // JSONObject firstDomain = domainList.getJSONObject(0);
 
-                        String domains = "";
-                        for (int n = 0; n < domainArray.length(); n++) {
-                            JSONObject domainConfig = domainArray.getJSONObject(n);
-                            String domain = domainConfig.getString("domain");
-                            String apiKey = domainConfig.getString("apiKey");
+                        final String domains[] = new String[] { "" };
+                        domainArray.forEach( emp -> {
+                            try {
+                                JSONObject domainObj = (JSONObject) emp;
+                                String domain = (String) domainObj.get("domain");
+                                String apiKey = (String) domainObj.get("apiKey");
 
-                            System.out.println("domain : " + domain);
-                            System.out.println("apiKey : " + apiKey);
+                                System.out.println("domain : " + domain);
+                                System.out.println("apiKey : " + apiKey);
 
-                            domains += domain;
-                        }
+                                domains[0] += domain;
+                            } catch (Exception ex) {
+                                ex.printStackTrace();
+                                responseWriter("unauthorized", resp, null);
+                                return;
+                            }
+                        });
 
-                        responseWriter("ok", resp, domains);
+                        responseWriter("ok", resp, domains[0]);
                     } catch (Exception ex) {
                         ex.printStackTrace();
                         responseWriter("unauthorized", resp, null);
