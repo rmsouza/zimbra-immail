@@ -137,7 +137,7 @@ public class Immail extends ExtensionHttpHandler {
         }
 
         //Initializes immailApiKey, immailURL, immailCreateTokenPath on this instance
-        if (this.initializeImmailAPI()) {
+        if (this.initializeImmailAPI(zimbraAccount.getName())) {
             switch (paramsMap.get("action")) {
                 case "signOn":
                     String token;
@@ -220,14 +220,13 @@ public class Immail extends ExtensionHttpHandler {
         }
     }
 
-    public Boolean initializeImmailAPI() {
+    public Boolean initializeImmailAPI(String email) {
         Properties prop = new Properties();
         try {
             FileInputStream input = new FileInputStream("/opt/zimbra/lib/ext/immail/config.properties");
 
-
             prop.load(input);
-            this.immailApiKey = prop.getProperty("immailApiKey");
+            this.immailApiKey = getApiKey(email);
             this.immailURL = prop.getProperty("immailURL");
             this.immailCreateTokenPath = prop.getProperty("immailCreateTokenPath");
             input.close();
@@ -237,6 +236,39 @@ public class Immail extends ExtensionHttpHandler {
         }
 
         return true;
+    }
+
+    public String getApiKey (String email) {
+        String[] arrOfStr = email.split("@");
+        String currentDomain = arrOfStr[1];
+
+        try {
+            JSONParser jsonParser = new JSONParser();
+            FileReader reader = new FileReader("/opt/zimbra/lib/ext/immail/config.domains.json");
+            Object obj = jsonParser.parse(reader);
+            JSONArray domainArray = (JSONArray) obj;
+
+            final String apiKeyArr[] = new String[] { "" };
+            domainArray.forEach( emp -> {
+                try {
+                    JSONObject domainObj = (JSONObject) emp;
+                    String domain = (String) domainObj.get("domain");
+                    String apiKey = (String) domainObj.get("apiKey");
+
+                    if (domain.equals(currentDomain)) {
+                        apiKeyArr[0] = apiKey;
+                    }
+
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                    return;
+                }
+            });
+            return apiKeyArr[0];
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return "Error getting Api Key";
+        }
     }
 
     /**
