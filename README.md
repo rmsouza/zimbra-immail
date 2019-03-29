@@ -84,9 +84,15 @@ In order to keep sincronized the user data in both plataforms Zimbra and imMail,
 
 3. Click the menu button on the top side of the screen and choose the "Manage Domain" option;
 
-4. Go to AD/LDAP integration tab and fill the LDAP data;
+4. Go to AD/LDAP integration tab and fill the LDAP data. See the example below
 
+![image](https://user-images.githubusercontent.com/279535/55256223-ef692a80-5232-11e9-9de1-b6f989825077.png)
 
+> Note that you might create an LDAP search filter however you want, but, if you provide "Base" and "Filter" data as the picture above, you'll already be able to import all users from the current domain
+
+5. Click on "Save";
+
+5. After that, click on "Sync AD/LDAP" in order to import the Zimbra users.
 
 ## Enjoy it!
 
