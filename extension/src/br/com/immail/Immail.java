@@ -30,19 +30,26 @@ package br.com.immail;
 
 
 import com.zimbra.cs.account.Account;
+import com.zimbra.cs.account.AuthToken;
+import com.zimbra.cs.account.Cos;
+import com.zimbra.cs.account.Provisioning;
 import com.zimbra.cs.extension.ExtensionHttpHandler;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.json.simple.parser.JSONParser;
 
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Properties;
+import java.util.Set;
 
 public class Immail extends ExtensionHttpHandler {
 
@@ -88,35 +95,26 @@ public class Immail extends ExtensionHttpHandler {
 
         //Just read a cos value to see if its a valid user
         try {
-            JSONParser jsonParser = new JSONParser();
-            FileReader reader = new FileReader("/opt/zimbra/lib/ext/immail/config.domains.json");
-            Object obj = jsonParser.parse(reader);
-            JSONArray domainList = (JSONArray) obj;
-            JSONObject firstDomain = domainList.getJSONObject(0);
+            Cookie[] cookies = req.getCookies();
+            for (int n = 0; n < cookies.length; n++) {
+                Cookie cookie = cookies[n];
 
-            responseWriter("ok", resp, firstDomain.getString("domain"));
-            return;
+                if (cookie.getName().equals("ZM_AUTH_TOKEN")) {
+                    authTokenStr = cookie.getValue();
+                    break;
+                }
+            }
 
-//            Cookie[] cookies = req.getCookies();
-//            for (int n = 0; n < cookies.length; n++) {
-//                Cookie cookie = cookies[n];
-//
-//                if (cookie.getName().equals("ZM_AUTH_TOKEN")) {
-//                    authTokenStr = cookie.getValue();
-//                    break;
-//                }
-//            }
-//
-//            if (authTokenStr != null) {
-//                AuthToken authToken = AuthToken.getAuthToken(authTokenStr);
-//                Provisioning prov = Provisioning.getInstance();
-//                zimbraAccount = Provisioning.getInstance().getAccountById(authToken.getAccountId());
-//                Cos cos = prov.getCOS(zimbraAccount);
-//                Set<String> allowedDomains = cos.getMultiAttrSet(Provisioning.A_zimbraProxyAllowedDomains);
-//            } else {
-//                responseWriter("unauthorized", resp, null);
-//                return;
-//            }
+            if (authTokenStr != null) {
+                AuthToken authToken = AuthToken.getAuthToken(authTokenStr);
+                Provisioning prov = Provisioning.getInstance();
+                zimbraAccount = Provisioning.getInstance().getAccountById(authToken.getAccountId());
+                Cos cos = prov.getCOS(zimbraAccount);
+                Set<String> allowedDomains = cos.getMultiAttrSet(Provisioning.A_zimbraProxyAllowedDomains);
+            } else {
+                responseWriter("unauthorized", resp, null);
+                return;
+            }
 
         } catch (Exception ex) {
             //crafted cookie? get out you.
@@ -125,37 +123,64 @@ public class Immail extends ExtensionHttpHandler {
             return;
         }
 
-//        final Map<String, String> paramsMap = new HashMap<String, String>();
-//
-//        if (req.getQueryString() != null) {
-//            String[] params = req.getQueryString().split("&");
-//            for (String param : params) {
-//                String[] subParam = param.split("=");
-//                paramsMap.put(subParam[0], subParam[1]);
-//            }
-//        } else {
-//            responseWriter("ok", resp, null);
-//            return;
-//        }
-//
-//        //Initializes immailApiKey, immailURL, immailCreateTokenPath on this instance
-//        if (this.initializeImmailAPI()) {
-//            switch (paramsMap.get("action")) {
-//                case "signOn":
-//                    String token;
-//                    token = this.createAuthToken(zimbraAccount.getName());
-//                    if (!"".equals(token)) {
-//                        resp.setHeader("Content-Type", "application/json");
-//                        responseWriter("ok", resp, "{\"token\":\""+token+"\"}");
-//                    } else {
-//                        responseWriter("error", resp, null);
-//                    }
-//                    break;
-//
-//            }
-//        } else {
-//            responseWriter("error", resp, null);
-//        }
+        final Map<String, String> paramsMap = new HashMap<String, String>();
+
+        if (req.getQueryString() != null) {
+            String[] params = req.getQueryString().split("&");
+            for (String param : params) {
+                String[] subParam = param.split("=");
+                paramsMap.put(subParam[0], subParam[1]);
+            }
+        } else {
+            responseWriter("ok", resp, null);
+            return;
+        }
+
+        //Initializes immailApiKey, immailURL, immailCreateTokenPath on this instance
+        if (this.initializeImmailAPI()) {
+            switch (paramsMap.get("action")) {
+                case "signOn":
+                    String token;
+                    token = this.createAuthToken(zimbraAccount.getName());
+                    if (!"".equals(token)) {
+                        resp.setHeader("Content-Type", "application/json");
+                        responseWriter("ok", resp, "{\"token\":\""+token+"\"}");
+                    } else {
+                        responseWriter("error", resp, null);
+                    }
+                    break;
+                case "test":
+                    try {
+                        JSONParser jsonParser = new JSONParser();
+                        FileReader reader = new FileReader("/opt/zimbra/lib/ext/immail/config.domains.json");
+                        Object obj = jsonParser.parse(reader);
+                        JSONArray domainArray = (JSONArray) obj;
+                        // JSONObject firstDomain = domainList.getJSONObject(0);
+
+                        String domains = "";
+                        for (int n = 0; n < domainArray.length(); n++) {
+                            JSONObject domainConfig = domainArray.getJSONObject(n);
+                            String domain = domainConfig.getString("domain");
+                            String apiKey = domainConfig.getString("apiKey");
+
+                            System.out.println("domain : " + domain);
+                            System.out.println("apiKey : " + apiKey);
+
+                            domains += domain;
+                        }
+
+                        responseWriter("ok", resp, domains);
+                    } catch (Exception ex) {
+                        ex.printStackTrace();
+                        responseWriter("unauthorized", resp, null);
+                        return;
+                    }
+                    break;
+
+            }
+        } else {
+            responseWriter("error", resp, null);
+        }
 
     }
 
