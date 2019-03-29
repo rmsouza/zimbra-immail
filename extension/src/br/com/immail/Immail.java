@@ -34,7 +34,7 @@ import com.zimbra.cs.account.AuthToken;
 import com.zimbra.cs.account.Cos;
 import com.zimbra.cs.account.Provisioning;
 import com.zimbra.cs.extension.ExtensionHttpHandler;
-import org.json.JSONObject;
+import org.json.simple.JSONObject;
 import org.json.simple.JSONArray;
 import org.json.simple.parser.JSONParser;
 
@@ -285,8 +285,10 @@ public class Immail extends ExtensionHttpHandler {
                 }
                 in.close();
                 // Start parsing
-                JSONObject obj = new JSONObject(response.toString());
-                String token = obj.getString("token");
+                JSONParser parser = new JSONParser();
+                JSONObject obj = (JSONObject) parser.parse(response.toString());
+
+                String token = (String) obj.get("token");
                 return token;
 
             } else {
