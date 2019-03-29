@@ -75,6 +75,19 @@ After update the zimlet may be you have to clean up the cache
 ```
 6. Make sure Zimlet is active for users.
 
+## LDAP Integration
+In order to keep sincronized the user data in both plataforms Zimbra and imMail, the LDAP data should be configured on imMail.
+
+1. Go to www.immail.com.br;
+
+2. Whether the domain that you want to configure already has an admin account in imMail, log in, otherwise, create a new account (the first account created for each domain, always will be the user admin);
+
+3. Click the menu button on the top side of the screen and choose the "Manage Domain" option;
+
+4. Go to AD/LDAP integration tab and fill the LDAP data;
+
+
+
 ## Enjoy it!
 
 ## Important Notes
