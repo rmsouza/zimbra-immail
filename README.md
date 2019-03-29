@@ -20,13 +20,29 @@ $ cp extension.jar /opt/zimbra/lib/ext/immail/extension.jar
 2. Then create the _config.properties_ text file in _/opt/zimbra/lib/ext/immail/config.properties_ with the contents:
 
 ```
-immailApiKey={API_KEY} (Provided by imMail)
 immailURL=https://api.immail.com.br
 immailCreateTokenPath=/auth/token
 ```
-> Do not forget to replace the {API_KEY} text by the value that was provided by the imMail team. If you have no the API_KEY, please, contact us via imMail App (support@immail.com.br).
 
-3. Restart Zimbra Server:
+3. This Zimlet allows integration of multiple domains, however, in order to make it possible, it is necessary to create the file in _/opt/zimbra/lib/ext/immail/config.domains.json_ as the example below:
+
+> Note that you have to set the apiKey and the correspondent domain. Each Api Key is unique and exclusive for each domain. If you have no Api Key, please, contact us via imMail App (support@immail.com.br).
+
+```
+[
+ {
+  "domain": "companyxpto.com",
+  "apiKey": "fbg3QZA9vZS9KCB62kb2E3mVWZu6Ez67"
+ },
+ {
+  "domain": "companyxyz.com",
+  "apiKey": "6SbkuQa9h6Te5N9yxJsGaPnWGFhXk2an"
+ }
+]
+
+```
+
+4. Restart the service as follows:
 
 ```
 $ zmmailboxdctl restart
