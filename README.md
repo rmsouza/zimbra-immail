@@ -24,7 +24,7 @@ immailURL=https://api.immail.com.br
 immailCreateTokenPath=/auth/token
 ```
 
-3. This Zimlet allows integration of multiple domains, however, in order to make it possible, it is necessary to create the file in _/opt/zimbra/lib/ext/immail/config.domains.json_ as the example below:
+3. This Zimlet allows integration of multiple domains. In order to make it possible, it is necessary to create the file in _/opt/zimbra/lib/ext/immail/config.domains.json_ as the example below:
 
 > Note that you have to set the apiKey and the correspondent domain. Each Api Key is unique and exclusive for each domain. If you have no Api Key, please, contact us via imMail App (support@immail.com.br).
 
@@ -68,7 +68,7 @@ zmprov mc default +zimbraProxyAllowedDomains *.immail.com.br
 ```
 5. Clean up the Zimlet cache.
 
-After update the zimlet may be you have to clean up the cache
+After update the zimlet you may have to clean up the cache.
 
 ```
  zmprov flushCache zimlet
@@ -76,19 +76,19 @@ After update the zimlet may be you have to clean up the cache
 6. Make sure Zimlet is active for users.
 
 ## LDAP Integration
-In order to keep sincronized the user data in both plataforms Zimbra and imMail, the LDAP data should be configured on imMail.
+In order to keep synchronized the user data in both platforms,  Zimbra and imMail, the LDAP data should be configured on imMail.
 
 1. Go to www.immail.com.br;
 
-2. Whether the domain that you want to configure already has an admin account in imMail, log in, otherwise, create a new account (the first account created for each domain, always will be the user admin);
+2. If the domain that you want to configure already has an admin account in imMail, log in. Otherwise create a new account (the first account created for each domain always will be the user admin);
 
 3. Click the menu button on the top side of the screen and choose the "Manage Domain" option;
 
-4. Go to AD/LDAP integration tab and fill the LDAP data. See the example below
+4. Go to AD/LDAP integration tab and fill in the LDAP data. See the example below:
 
 ![image](https://user-images.githubusercontent.com/279535/55256223-ef692a80-5232-11e9-9de1-b6f989825077.png)
 
-> Note that you might create an LDAP search filter however you want, but, if you provide "Base" and "Filter" data as the picture above, you'll already be able to import all users from the current domain
+> Note that you might create an LDAP search filter.  If you provide "Base" and "Filter" data, as the picture below, you'll be able to import all users from the current domain.
 
 5. Click on "Save";
 
@@ -98,10 +98,10 @@ In order to keep sincronized the user data in both plataforms Zimbra and imMail,
 
 ## Important Notes
 
-**Nothing has been presented into the imMail tab.**
+**No information related do LDAP will be presented into the imMail tab.**
 
-If someone has been a problem like this on Chrome, the browser can be blocking third-party cookies.
+If someone has a problem like this on Chrome, the browser can be blocking third-party cookies.
 
-To find the setting, open Chrome settings, type "content" in the search box, click the Content Settings option, then click the Cookies option and uncheck the option that says something like this "Block third-party cookies and site data".
+To find the setting option screen/windows, open Chrome settings, type "content" in the search box, click the Content Settings option, then click the Cookies option and uncheck the option that says something like this "Block third-party cookies and site data".
 
 Click [here](https://www.chromium.org/for-testers/bug-reporting-guidelines/uncaught-securityerror-failed-to-read-the-localstorage-property-from-window-access-is-denied-for-this-document) for more info.
