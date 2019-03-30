@@ -10,7 +10,7 @@ Here you will find important instructions to install a Zimlet that makes possibl
 # Installation
 
 ## Single Sign-on Integration
-This Zimlet supports optional single sign-on to imMail using the imMail API. That way you only need to maintain the user accounts on Zimbra. The account creation can be done via LDAP import or by the own user on imMail platform, but in both of cases, you will still log them on automatically (single sign-on integration). Or you can just deploy only the Zimlet and let the user decide on the authentication (basic integration).
+This Zimlet supports optional single sign-on to imMail using the imMail API. That way you only need to maintain the user accounts on Zimbra. The account creation can be done via LDAP import or by the own user on imMail platform, but in both cases you still be logged on automatically (single sign-on integration). Or you can just deploy only the Zimlet and let the user decide on the authentication (basic integration).
 
 > If you do not want to activate the Single Sign-on option,  skip this step and go straight to the Basic Integration.
 
