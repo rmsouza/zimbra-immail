@@ -1,4 +1,10 @@
-# Zimbra and imMail Integration
+<h1 align="center">
+  <img src="https://user-images.githubusercontent.com/279535/55269168-e72ae280-5266-11e9-9edb-d7298777d34d.png" alt="logo" height="70"/>
+  <img src="https://user-images.githubusercontent.com/279535/54444172-8e146800-4718-11e9-97ea-33baf30bc164.png" alt="logo" height="70"/><br>
+
+  Zimbra & imMail Integration
+</h1>
+
 Here you will find important instructions to install a Zimlet that makes possible the integration between Zimbra Collaboration Server and imMail (Instant Messenger for Companies), and make an amazing integration with both inside the Zimbra Web Client.
 
 # Installation
