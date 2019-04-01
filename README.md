@@ -14,7 +14,7 @@ This Zimlet supports optional single sign-on to imMail using the imMail API. Tha
 
 > If you do not want to activate the Single Sign-on option,  skip this step and go straight to the Basic Integration.
 
-### API KEY
+**API KEY**
 In order to allow the integration with imMail, will be necessary to generate an API KEY.
 
 1. Go to www.immail.com.br;
@@ -30,7 +30,7 @@ In order to allow the integration with imMail, will be necessary to generate an 
 
 6. Copy the created API KEY and save in a safe place.
 
-### Java extension configuration
+**Java extension configuration**
 
 1. For Single Sign-on Integration you have to set-up the Java server extension. Download the extension.jar file and copy it to _/opt/zimbra/lib/ext/immail/extension.jar_
 
