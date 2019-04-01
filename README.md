@@ -15,6 +15,7 @@ This Zimlet supports optional single sign-on to imMail using the imMail API. Tha
 > If you do not want to activate the Single Sign-on option,  skip this step and go straight to the Basic Integration.
 
 **API KEY**
+
 In order to allow the integration with imMail, will be necessary to generate an API KEY.
 
 1. Go to www.immail.com.br;
