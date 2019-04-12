@@ -27,8 +27,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/br/com/immail/Immail.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="285">
-              <caret line="226" column="8" lean-forward="true" selection-start-line="226" selection-start-column="8" selection-end-line="226" selection-end-column="8" />
+            <state relative-caret-position="120">
+              <caret line="219" column="45" lean-forward="true" selection-start-line="219" selection-start-column="45" selection-end-line="219" selection-end-column="45" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#1831#1832#0" expanded="true" />
@@ -189,7 +189,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-1" y="-11" width="1368" height="780" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.2" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -288,8 +287,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/br/com/immail/Immail.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="226" column="8" lean-forward="true" selection-start-line="226" selection-start-column="8" selection-end-line="226" selection-end-column="8" />
+        <state relative-caret-position="120">
+          <caret line="219" column="45" lean-forward="true" selection-start-line="219" selection-start-column="45" selection-end-line="219" selection-end-column="45" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#1831#1832#0" expanded="true" />

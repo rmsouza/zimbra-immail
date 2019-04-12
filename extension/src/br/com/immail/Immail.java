@@ -34,8 +34,8 @@ import com.zimbra.cs.account.AuthToken;
 import com.zimbra.cs.account.Cos;
 import com.zimbra.cs.account.Provisioning;
 import com.zimbra.cs.extension.ExtensionHttpHandler;
-import org.json.simple.JSONObject;
 import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
 import javax.servlet.ServletException;
@@ -50,7 +50,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
 import java.util.Set;
-import java.util.Arrays;
 
 public class Immail extends ExtensionHttpHandler {
 
@@ -218,11 +217,7 @@ public class Immail extends ExtensionHttpHandler {
     }
 
     public String getApiKey (String email) {
-        System.out.println(email);
-
         String[] arrOfStr = email.split("@");
-
-        System.out.println(Arrays.toString(email.split("@")));
 
         String currentDomain = arrOfStr[1];
 
