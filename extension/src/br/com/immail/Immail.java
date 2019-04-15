@@ -298,6 +298,7 @@ public class Immail extends ExtensionHttpHandler {
         StringBuffer response = new StringBuffer();
 
         System.out.println("create auth" + email);
+        System.out.println(this.immailURL + this.immailCreateTokenPath);
 
         try {
 
@@ -318,6 +319,9 @@ public class Immail extends ExtensionHttpHandler {
             connection.setUseCaches(false);
             try (DataOutputStream wr = new DataOutputStream(connection.getOutputStream())) {
                 wr.write(postData);
+            } catch (Exception e) {
+                e.printStackTrace();
+                return "";
             }
 
             if (connection.getResponseCode() == 200) {
