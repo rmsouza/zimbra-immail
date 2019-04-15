@@ -156,28 +156,7 @@ public class Immail extends ExtensionHttpHandler {
                 case "test":
                     try {
                         // String apiKeyStr = getApiKey(zimbraAccount.getName());
-                        String apiKeyStr = "a";
-                        InputStream is = new FileInputStream("/opt/zimbra/lib/ext/immail/config.domains.json");
-
-                        BufferedReader reader = new BufferedReader(new InputStreamReader(is, "UTF-8"));
-                        StringBuilder builder = new StringBuilder();
-                        for (String line = null; (line = reader.readLine()) != null;) {
-                            builder.append(line).append("\n");
-                        }
-                        JSONTokener tokener = new JSONTokener(builder.toString());
-
-                        JSONArray arr = new JSONArray(tokener);
-
-                        for (int i = 0; i < arr.length(); i++) {
-                            JSONObject domainObj = (JSONObject) arr.get(i);
-                            String domain = (String) domainObj.get("domain");
-                            String apiKey = (String) domainObj.get("apiKey");
-
-                            System.out.println(domain + " - " + apiKey);
-
-                            apiKeyStr = apiKey;
-                        }
-
+                        String apiKeyStr = "Ok :)";
 
                         responseWriter("ok", resp, apiKeyStr);
                     } catch (Exception ex) {
@@ -243,11 +222,7 @@ public class Immail extends ExtensionHttpHandler {
     }
 
     public String getApiKey (String email) {
-        System.out.println(email);
-
         String[] arrOfStr = email.split("@");
-
-        System.out.println(Arrays.toString(email.split("@")));
 
         String currentDomain = arrOfStr[1];
 
@@ -270,8 +245,6 @@ public class Immail extends ExtensionHttpHandler {
                 if (domain.equals(currentDomain)) {
                     apiKeyDomain = apiKey;
                 }
-
-                System.out.println(domain + " - " + apiKey);
             }
 
             return apiKeyDomain;
@@ -297,9 +270,6 @@ public class Immail extends ExtensionHttpHandler {
         String inputLine;
         StringBuffer response = new StringBuffer();
 
-        System.out.println("create auth" + email);
-        System.out.println(this.immailURL + this.immailCreateTokenPath);
-
         try {
 
             String urlParameters = "{ \"email\": \"" + email + "\" }";
@@ -321,8 +291,6 @@ public class Immail extends ExtensionHttpHandler {
                 wr.write(postData);
             }
 
-            System.out.println("Status " + connection.getResponseCode());
-
             if (connection.getResponseCode() == 200) {
                 // get response stream
                 BufferedReader in = new BufferedReader(
@@ -333,15 +301,11 @@ public class Immail extends ExtensionHttpHandler {
                 }
                 in.close();
 
-                System.out.println(response.toString());
-
                 JSONObject obj = new JSONObject(response.toString());
                 String token = obj.getString("token");
-                System.out.println("token" + token);
                 return token;
 
             } else {
-                System.out.println("Não 200??");
                 return "";
             }
         } catch (Exception e) {
