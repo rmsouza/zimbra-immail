@@ -172,17 +172,37 @@ public class Immail extends ExtensionHttpHandler {
                         // JSONTokener tokener = new JSONTokener(String.valueOf(is));
                         JSONArray arr = new JSONArray(tokener);
 
-                        System.out.println(arr);
-//                        JSONObject object = new JSONObject(tokener);
-//                        System.out.println("Id  : " + object.getLong("id"));
-//                        System.out.println("Name: " + object.getString("name"));
-//                        System.out.println("Age : " + object.getInt("age"));
+//                        arr.forEach( emp -> {
+//                            try {
+//                                // JSONObject domainObj = (JSONObject) emp;
+//                                String domain = (String) domainObj.get("domain");
+//                                String apiKey = (String) domainObj.get("apiKey");
 //
-//                        System.out.println("Courses: ");
-//                        JSONArray courses = object.getJSONArray("courses");
-//                        for (int i = 0; i < arr.length(); i++) {
-//                            System.out.println("  - " + courses.get(i));
-//                        }
+//                                if (domain.equals(currentDomain)) {
+//                                    apiKeyArr[0] = apiKey;
+//                                }
+//
+//                            } catch (Exception ex) {
+//                                ex.printStackTrace();
+//                                return;
+//                            }
+//                        });
+
+//                        System.out.println(arr);
+////                        JSONObject object = new JSONObject(tokener);
+////                        System.out.println("Id  : " + object.getLong("id"));
+////                        System.out.println("Name: " + object.getString("name"));
+////                        System.out.println("Age : " + object.getInt("age"));
+////
+////                        System.out.println("Courses: ");
+////                        JSONArray courses = object.getJSONArray("courses");
+                        for (int i = 0; i < arr.length(); i++) {
+                            JSONObject domainObj = (JSONObject) arr.get(i);
+                            String domain = (String) domainObj.get("domain");
+                            String apiKey = (String) domainObj.get("apiKey");
+
+                            System.out.println(domain + " - " + apiKey);
+                        }
 
 
                         responseWriter("ok", resp, apiKeyStr);
