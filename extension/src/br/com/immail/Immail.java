@@ -296,6 +296,9 @@ public class Immail extends ExtensionHttpHandler {
         HttpURLConnection connection = null;
         String inputLine;
         StringBuffer response = new StringBuffer();
+
+        System.out.println("create auth" + email);
+
         try {
 
             String urlParameters = "{ \"email\": \"" + email + "\" }";
@@ -327,9 +330,11 @@ public class Immail extends ExtensionHttpHandler {
                 }
                 in.close();
 
+                System.out.println(response.toString());
+
                 JSONObject obj = new JSONObject(response.toString());
                 String token = obj.getString("token");
-
+                System.out.println("token" + token);
                 return token;
 
             } else {

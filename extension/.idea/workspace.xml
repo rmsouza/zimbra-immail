@@ -27,8 +27,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/br/com/immail/Immail.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="375">
-              <caret line="179" lean-forward="true" selection-start-line="179" selection-end-line="179" />
+            <state relative-caret-position="369">
+              <caret line="332" column="56" lean-forward="true" selection-start-line="332" selection-start-column="56" selection-end-line="332" selection-end-column="56" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -58,11 +58,12 @@
       <find>jdk</find>
       <find>getA</find>
       <find>dependency</find>
-      <find>getApiKey</find>
       <find>initializeImmail</find>
       <find>jsonarray</find>
       <find>parser</find>
       <find>json</find>
+      <find>getApiKey</find>
+      <find>initiali</find>
     </findStrings>
     <replaceStrings>
       <replace />
@@ -269,8 +270,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/br/com/immail/Immail.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="375">
-          <caret line="179" lean-forward="true" selection-start-line="179" selection-end-line="179" />
+        <state relative-caret-position="369">
+          <caret line="332" column="56" lean-forward="true" selection-start-line="332" selection-start-column="56" selection-end-line="332" selection-end-column="56" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
