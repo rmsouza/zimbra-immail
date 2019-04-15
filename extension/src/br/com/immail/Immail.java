@@ -160,13 +160,17 @@ public class Immail extends ExtensionHttpHandler {
                         // String apiKeyStr = getApiKey(zimbraAccount.getName());
                         String apiKeyStr = "a";
                         InputStream is = new FileInputStream("/opt/zimbra/lib/ext/immail/config.domains.json");
-                        // InputStream is = ReadJSONString.class.getResourceAsStream(resourceName);
-                        if (is == null) {
-                            throw new NullPointerException("Cannot find resource file ");
+
+                        BufferedReader reader = new BufferedReader(new InputStreamReader(is, "UTF-8"));
+                        StringBuilder builder = new StringBuilder();
+                        for (String line = null; (line = reader.readLine()) != null;) {
+                            builder.append(line).append("\n");
                         }
+                        JSONTokener tokener = new JSONTokener(builder.toString());
+
 
                         // JSONTokener tokener = new JSONTokener(String.valueOf(is));
-                        JSONArray arr = new JSONArray(String.valueOf(is));
+                        JSONArray arr = new JSONArray(tokener);
 
                         System.out.println(arr);
 //                        JSONObject object = new JSONObject(tokener);
