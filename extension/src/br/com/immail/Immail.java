@@ -53,7 +53,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
 import java.util.Set;
-import java.util.Arrays;
 
 public class Immail extends ExtensionHttpHandler {
 
