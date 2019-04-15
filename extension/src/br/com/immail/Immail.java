@@ -143,7 +143,7 @@ public class Immail extends ExtensionHttpHandler {
         }
 
         //Initializes immailApiKey, immailURL, immailCreateTokenPath on this instance
-        if (this.initializeImmailAPI(zimbraAccount.getName())) {
+        //if (this.initializeImmailAPI(zimbraAccount.getName())) {
             switch (paramsMap.get("action")) {
                 case "signOn":
                     String token;
@@ -190,9 +190,9 @@ public class Immail extends ExtensionHttpHandler {
                     break;
 
             }
-        } else {
-            responseWriter("error", resp, null);
-        }
+        //} else {
+            //responseWriter("error", resp, null);
+        //}
 
     }
 
