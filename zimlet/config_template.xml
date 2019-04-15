@@ -1,9 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<<<<<<< HEAD
-<zimletConfig name="br_com_immail" version="0.0.2">
-=======
-<zimletConfig name="br_com_immail" version="0.0.5">
->>>>>>> a62c0b1bc009cad442f378a3614a0a2701b3156a
+<zimletConfig name="br_com_immail" version="0.3.0">
   <global>
     <property name="iframeURL">https://app.immail.com.br</property>
     <property name="appName">imMail</property>
