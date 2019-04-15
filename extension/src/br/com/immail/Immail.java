@@ -34,9 +34,14 @@ import com.zimbra.cs.account.AuthToken;
 import com.zimbra.cs.account.Cos;
 import com.zimbra.cs.account.Provisioning;
 import com.zimbra.cs.extension.ExtensionHttpHandler;
-import org.json.simple.JSONObject;
-import org.json.simple.JSONArray;
+
 import org.json.simple.parser.JSONParser;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
+import org.json.JSONTokener;
+
+import java.io.InputStream;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.Cookie;
@@ -152,7 +157,29 @@ public class Immail extends ExtensionHttpHandler {
                     break;
                 case "test":
                     try {
-                        String apiKeyStr = getApiKey(zimbraAccount.getName());
+                        // String apiKeyStr = getApiKey(zimbraAccount.getName());
+                        String apiKeyStr = "a";
+                        InputStream is = new FileInputStream("/opt/zimbra/lib/ext/immail/config.domains.json");
+                        // InputStream is = ReadJSONString.class.getResourceAsStream(resourceName);
+                        if (is == null) {
+                            throw new NullPointerException("Cannot find resource file ");
+                        }
+
+                        JSONTokener tokener = new JSONTokener(String.valueOf(is));
+                        JSONArray arr = new JSONArray(tokener);
+
+                        System.out.println(arr);
+//                        JSONObject object = new JSONObject(tokener);
+//                        System.out.println("Id  : " + object.getLong("id"));
+//                        System.out.println("Name: " + object.getString("name"));
+//                        System.out.println("Age : " + object.getInt("age"));
+//
+//                        System.out.println("Courses: ");
+//                        JSONArray courses = object.getJSONArray("courses");
+//                        for (int i = 0; i < arr.length(); i++) {
+//                            System.out.println("  - " + courses.get(i));
+//                        }
+
 
                         responseWriter("ok", resp, apiKeyStr);
                     } catch (Exception ex) {
@@ -233,21 +260,21 @@ public class Immail extends ExtensionHttpHandler {
             JSONArray domainArray = (JSONArray) obj;
 
             final String apiKeyArr[] = new String[] { "" };
-            domainArray.forEach( emp -> {
-                try {
-                    JSONObject domainObj = (JSONObject) emp;
-                    String domain = (String) domainObj.get("domain");
-                    String apiKey = (String) domainObj.get("apiKey");
-
-                    if (domain.equals(currentDomain)) {
-                        apiKeyArr[0] = apiKey;
-                    }
-
-                } catch (Exception ex) {
-                    ex.printStackTrace();
-                    return;
-                }
-            });
+//            domainArray.forEach( emp -> {
+//                try {
+////                    JSONObject domainObj = (JSONObject) emp;
+////                    String domain = (String) domainObj.get("domain");
+////                    String apiKey = (String) domainObj.get("apiKey");
+////
+////                    if (domain.equals(currentDomain)) {
+////                        apiKeyArr[0] = apiKey;
+////                    }
+//
+//                } catch (Exception ex) {
+//                    ex.printStackTrace();
+//                    return;
+//                }
+//            });
             return apiKeyArr[0];
         } catch (Exception ex) {
             ex.printStackTrace();

@@ -7,7 +7,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4fb75654-dda3-477b-98d1-1fa731550fd9" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/out/artifacts/extension_jar/extension.jar" beforeDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/json.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/extension.iml" beforeDir="false" afterPath="$PROJECT_DIR$/extension.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/extension/br/com/immail/Immail.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/br/com/immail/Immail.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/br/com/immail/Immail.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -27,8 +31,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/br/com/immail/Immail.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="397">
-              <caret line="242" column="46" lean-forward="true" selection-start-line="242" selection-start-column="46" selection-end-line="242" selection-end-column="46" />
+            <state relative-caret-position="342">
+              <caret line="276" column="17" lean-forward="true" selection-start-line="262" selection-start-column="14" selection-end-line="276" selection-end-column="17" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -56,6 +60,9 @@
       <find>init</find>
       <find>ExtensionDispatcherServlet</find>
       <find>jdk</find>
+      <find>getA</find>
+      <find>json</find>
+      <find>dependency</find>
     </findStrings>
     <replaceStrings>
       <replace />
@@ -72,8 +79,8 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/br/com/immail/Immail.java" />
         <option value="$PROJECT_DIR$/.idea/misc.xml" />
+        <option value="$PROJECT_DIR$/src/br/com/immail/Immail.java" />
       </list>
     </option>
   </component>
@@ -88,23 +95,13 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
             <path>
               <item name="extension" type="b2602c69:ProjectViewProjectNode" />
               <item name="extension" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="extension" type="b2602c69:ProjectViewProjectNode" />
-              <item name="extension" type="462c0819:PsiDirectoryNode" />
-              <item name=".idea" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="extension" type="b2602c69:ProjectViewProjectNode" />
-              <item name="extension" type="462c0819:PsiDirectoryNode" />
-              <item name="out" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="extension" type="b2602c69:ProjectViewProjectNode" />
@@ -121,13 +118,13 @@
           <select />
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="project.structure.last.edited" value="Modules" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/lib/json.jar!/" />
+    <property name="project.structure.last.edited" value="Libraries" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
   </component>
@@ -165,7 +162,7 @@
     <frame x="0" y="-4" width="1360" height="772" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.70826834" visible="true" weight="0.26940638" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.70826834" visible="true" weight="0.2739726" />
       <window_info id="Structure" order="1" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -182,7 +179,7 @@
       <window_info anchor="bottom" id="Version Control" order="7" />
       <window_info anchor="bottom" id="Terminal" order="8" />
       <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" weight="0.32884902" />
-      <window_info anchor="bottom" id="Messages" order="10" weight="0.32884902" />
+      <window_info active="true" anchor="bottom" id="Messages" order="10" visible="true" weight="0.32884902" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -246,13 +243,6 @@
     <entry file="file://$PROJECT_DIR$/.idea/libraries/zcs_lib_json_simple.xml">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/.idea/workspace.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="195">
-          <caret line="311" column="19" lean-forward="true" selection-start-line="311" selection-start-column="19" selection-end-line="311" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/.idea/misc.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="75">
@@ -267,10 +257,20 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/.idea/libraries/json.xml">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.idea/workspace.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="195">
+          <caret line="139" column="72" selection-start-line="139" selection-start-column="68" selection-end-line="139" selection-end-column="72" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/br/com/immail/Immail.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="397">
-          <caret line="242" column="46" lean-forward="true" selection-start-line="242" selection-start-column="46" selection-end-line="242" selection-end-column="46" />
+        <state relative-caret-position="342">
+          <caret line="276" column="17" lean-forward="true" selection-start-line="262" selection-start-column="14" selection-end-line="276" selection-end-column="17" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -359,7 +359,7 @@
       </state>
       <state key="ProjectLibrariesConfigurable.UI">
         <settings>
-          <last-edited>lib</last-edited>
+          <last-edited>json</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>
