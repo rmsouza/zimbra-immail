@@ -165,8 +165,8 @@ public class Immail extends ExtensionHttpHandler {
                             throw new NullPointerException("Cannot find resource file ");
                         }
 
-                        JSONTokener tokener = new JSONTokener(String.valueOf(is));
-                        JSONArray arr = new JSONArray(tokener);
+                        // JSONTokener tokener = new JSONTokener(String.valueOf(is));
+                        JSONArray arr = new JSONArray(String.valueOf(is));
 
                         System.out.println(arr);
 //                        JSONObject object = new JSONObject(tokener);
