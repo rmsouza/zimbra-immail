@@ -319,10 +319,9 @@ public class Immail extends ExtensionHttpHandler {
             connection.setUseCaches(false);
             try (DataOutputStream wr = new DataOutputStream(connection.getOutputStream())) {
                 wr.write(postData);
-            } catch (Exception e) {
-                e.printStackTrace();
-                return "";
             }
+
+            System.out.println("Status " + connection.getResponseCode());
 
             if (connection.getResponseCode() == 200) {
                 // get response stream
@@ -342,6 +341,7 @@ public class Immail extends ExtensionHttpHandler {
                 return token;
 
             } else {
+                System.out.println("Não 200??");
                 return "";
             }
         } catch (Exception e) {
