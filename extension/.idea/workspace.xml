@@ -27,8 +27,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/br/com/immail/Immail.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="146">
-              <caret line="174" selection-start-line="174" selection-start-column="2" selection-end-line="188" selection-end-column="29" />
+            <state relative-caret-position="375">
+              <caret line="179" lean-forward="true" selection-start-line="179" selection-end-line="179" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -57,11 +57,12 @@
       <find>ExtensionDispatcherServlet</find>
       <find>jdk</find>
       <find>getA</find>
-      <find>json</find>
       <find>dependency</find>
       <find>getApiKey</find>
       <find>initializeImmail</find>
       <find>jsonarray</find>
+      <find>parser</find>
+      <find>json</find>
     </findStrings>
     <replaceStrings>
       <replace />
@@ -161,7 +162,7 @@
     <frame x="0" y="-4" width="1360" height="772" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.70826834" visible="true" weight="0.2739726" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.70826834" visible="true" weight="0.16210045" />
       <window_info id="Structure" order="1" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -268,8 +269,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/br/com/immail/Immail.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="146">
-          <caret line="174" selection-start-line="174" selection-start-column="2" selection-end-line="188" selection-end-column="29" />
+        <state relative-caret-position="375">
+          <caret line="179" lean-forward="true" selection-start-line="179" selection-end-line="179" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

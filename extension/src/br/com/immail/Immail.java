@@ -35,8 +35,6 @@ import com.zimbra.cs.account.Cos;
 import com.zimbra.cs.account.Provisioning;
 import com.zimbra.cs.extension.ExtensionHttpHandler;
 
-import org.json.simple.parser.JSONParser;
-
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.json.JSONTokener;
@@ -143,7 +141,7 @@ public class Immail extends ExtensionHttpHandler {
         }
 
         //Initializes immailApiKey, immailURL, immailCreateTokenPath on this instance
-        //if (this.initializeImmailAPI(zimbraAccount.getName())) {
+        if (this.initializeImmailAPI(zimbraAccount.getName())) {
             switch (paramsMap.get("action")) {
                 case "signOn":
                     String token;
@@ -168,40 +166,16 @@ public class Immail extends ExtensionHttpHandler {
                         }
                         JSONTokener tokener = new JSONTokener(builder.toString());
 
-
-                        // JSONTokener tokener = new JSONTokener(String.valueOf(is));
                         JSONArray arr = new JSONArray(tokener);
 
-//                        arr.forEach( emp -> {
-//                            try {
-//                                // JSONObject domainObj = (JSONObject) emp;
-//                                String domain = (String) domainObj.get("domain");
-//                                String apiKey = (String) domainObj.get("apiKey");
-//
-//                                if (domain.equals(currentDomain)) {
-//                                    apiKeyArr[0] = apiKey;
-//                                }
-//
-//                            } catch (Exception ex) {
-//                                ex.printStackTrace();
-//                                return;
-//                            }
-//                        });
-
-//                        System.out.println(arr);
-////                        JSONObject object = new JSONObject(tokener);
-////                        System.out.println("Id  : " + object.getLong("id"));
-////                        System.out.println("Name: " + object.getString("name"));
-////                        System.out.println("Age : " + object.getInt("age"));
-////
-////                        System.out.println("Courses: ");
-////                        JSONArray courses = object.getJSONArray("courses");
                         for (int i = 0; i < arr.length(); i++) {
                             JSONObject domainObj = (JSONObject) arr.get(i);
                             String domain = (String) domainObj.get("domain");
                             String apiKey = (String) domainObj.get("apiKey");
 
                             System.out.println(domain + " - " + apiKey);
+
+                            apiKeyStr = apiKey;
                         }
 
 
@@ -214,9 +188,9 @@ public class Immail extends ExtensionHttpHandler {
                     break;
 
             }
-        //} else {
-            //responseWriter("error", resp, null);
-        //}
+        } else {
+            responseWriter("error", resp, null);
+        }
 
     }
 
@@ -278,28 +252,29 @@ public class Immail extends ExtensionHttpHandler {
         String currentDomain = arrOfStr[1];
 
         try {
-            JSONParser jsonParser = new JSONParser();
-            FileReader reader = new FileReader("/opt/zimbra/lib/ext/immail/config.domains.json");
-            Object obj = jsonParser.parse(reader);
-            JSONArray domainArray = (JSONArray) obj;
+            InputStream is = new FileInputStream("/opt/zimbra/lib/ext/immail/config.domains.json");
+            BufferedReader reader = new BufferedReader(new InputStreamReader(is, "UTF-8"));
+            StringBuilder builder = new StringBuilder();
+            for (String line = null; (line = reader.readLine()) != null;) {
+                builder.append(line).append("\n");
+            }
+            JSONTokener tokener = new JSONTokener(builder.toString());
+            JSONArray arr = new JSONArray(tokener);
 
-            final String apiKeyArr[] = new String[] { "" };
-//            domainArray.forEach( emp -> {
-//                try {
-////                    JSONObject domainObj = (JSONObject) emp;
-////                    String domain = (String) domainObj.get("domain");
-////                    String apiKey = (String) domainObj.get("apiKey");
-////
-////                    if (domain.equals(currentDomain)) {
-////                        apiKeyArr[0] = apiKey;
-////                    }
-//
-//                } catch (Exception ex) {
-//                    ex.printStackTrace();
-//                    return;
-//                }
-//            });
-            return apiKeyArr[0];
+            String apiKeyDomain = "";
+            for (int i = 0; i < arr.length(); i++) {
+                JSONObject domainObj = (JSONObject) arr.get(i);
+                String domain = (String) domainObj.get("domain");
+                String apiKey = (String) domainObj.get("apiKey");
+
+                if (domain.equals(currentDomain)) {
+                    apiKeyDomain = apiKey;
+                }
+
+                System.out.println(domain + " - " + apiKey);
+            }
+
+            return apiKeyDomain;
         } catch (Exception ex) {
             ex.printStackTrace();
             return "Error getting Api Key";
@@ -351,11 +326,10 @@ public class Immail extends ExtensionHttpHandler {
                     response.append(inputLine);
                 }
                 in.close();
-                // Start parsing
-                JSONParser parser = new JSONParser();
-                JSONObject obj = (JSONObject) parser.parse(response.toString());
 
-                String token = (String) obj.get("token");
+                JSONObject obj = new JSONObject(response.toString());
+                String token = obj.getString("token");
+
                 return token;
 
             } else {
