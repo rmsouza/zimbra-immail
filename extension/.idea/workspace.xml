@@ -75,8 +75,7 @@
       <find>createAuth</find>
       <find>initializeImmail</find>
       <find>json</find>
-      <find>json_simple_1_1_1.xml</find>
-      <find>json.xml</find>
+      <find>zcs-lib-json-simple.xml</find>
       <find>zimbraclient</find>
     </findStrings>
     <dirStrings>
@@ -93,7 +92,7 @@
         <option value="$PROJECT_DIR$/src/br/com/immail/ImmailExtension.java" />
         <option value="$PROJECT_DIR$/.idea/libraries/lib.xml" />
         <option value="$PROJECT_DIR$/META-INF/MANIFEST.MF" />
-        <option value="$PROJECT_DIR$/.idea/libraries/json.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/zcs-lib-json-simple.xml" />
         <option value="$PROJECT_DIR$/.idea/artifacts/extension_jar.xml" />
         <option value="$PROJECT_DIR$/extension.iml" />
         <option value="$PROJECT_DIR$/src/br/com/immail/Immail.java" />
@@ -266,7 +265,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/.idea/libraries/json.xml">
+    <entry file="file://$PROJECT_DIR$/.idea/libraries/zcs-lib-json-simple.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="120">
           <caret line="8" column="12" selection-start-line="8" selection-start-column="12" selection-end-line="8" selection-end-column="12" />
@@ -277,19 +276,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="150">
           <caret line="10" column="12" lean-forward="true" selection-start-line="10" selection-start-column="12" selection-end-line="10" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$PROJECT_DIR$/lib/json.jar!/META-INF/MANIFEST.MF">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/.idea/libraries/json_simple_1_1_1.xml">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="jar://$PROJECT_DIR$/lib/json-simple-1.1.1.jar!/org/json/simple/parser/JSONParser.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="6" column="13" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
         </state>
       </provider>
     </entry>
