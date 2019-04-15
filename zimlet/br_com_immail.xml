@@ -1,4 +1,4 @@
-<zimlet name="br_com_immail" version="0.0.4" label="imMail" description="Professional messaging application">
+<zimlet name="br_com_immail" version="0.0.2" label="imMail" description="Professional messaging application">
    <summary></summary>
    <resource>immail.png</resource>
    <include>br_com_immail.js</include>
