@@ -130,3 +130,24 @@ If someone has a problem like this on Chrome, the browser can be blocking third-
 To find the setting option screen/windows, open Chrome settings, type "content" in the search box, click the Content Settings option, then click the Cookies option and uncheck the option that says something like this "Block third-party cookies and site data".
 
 Click [here](https://www.chromium.org/for-testers/bug-reporting-guidelines/uncaught-securityerror-failed-to-read-the-localstorage-property-from-window-access-is-denied-for-this-document) for more info.
+
+## Development
+
+The project has two most important directories "/zimlet" and "/extension".
+
+**/zimlet** has all javascript, css, xml and image files that makes up the Zimlet.
+
+**/extension** has a Java extension project which is important for the single signon feature. It's a IntelliJ project, so, would be a good idea to open the project by it.
+
+## Build process
+
+**Step 1**: Generate the .jar file.
+
+Open the "extension" folder on IntelliJ, go to main menu and click on "Build", and then "Build Artifacts", and finally "Build".
+
+**Step 2**: Update the iframeURL properties on /zimlet/config_template.xml with the imMail frondend url. For example: https://app.immail.com.br (for production) or https://testapp.immail.com.br (for test environment).
+
+**Step3**: Run .build.sh providing the current version of the Zimlet like below:
+```
+./build.sh 0.3.0
+```
