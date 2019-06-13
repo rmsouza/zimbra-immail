@@ -192,3 +192,20 @@ zmprov sp <admin email address> <new password>
 su - zimbra
 zmprov gaaa
 ```
+
+**Zimbra connection test**
+
+Install ldap-utils. If you want to know a little more about how to manage LDAP servers with OpenLDAP utils, please take a look this https://www.digitalocean.com/community/tutorials/how-to-manage-and-use-ldap-servers-with-openldap-utilities
+
+```
+sudo apt-get update
+sudo apt-get install ldap-utils
+```
+Try to connect.
+```
+ldapsearch -H ldap://host:389 -D <DN> -b <BASE> -W -s sub "(objectclass=*)"
+
+Ex.:
+ldapsearch -H ldap://localhost:389 -D uid=zimbra,cn=admins,cn=zimbra -b "dc=immailtest,dc=com" -W -s sub "(objectclass=*)"
+```
+After this command the password will be requested.
