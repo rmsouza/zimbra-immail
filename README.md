@@ -151,3 +151,29 @@ Open the "extension" folder on IntelliJ, go to main menu and click on "Build", a
 ```
 ./build.sh 0.3.0
 ```
+
+## Zimbra command might be usefull
+
+**Show ldap data connection**
+```
+su zimbra
+zmlocalconfig -s | grep zimbra_ldap_password
+```
+
+**Recovery root password**
+```
+su zimbra
+zmlocalconfig -s | grep ldap_root_password
+```
+
+**Restart all Zimbra services**
+```
+su zimbra
+zmcontrol restart
+```
+
+**Restart only mail service**
+```
+su zimbra
+zmmailboxdctl restart
+```
