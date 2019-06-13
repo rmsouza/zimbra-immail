@@ -177,3 +177,18 @@ zmcontrol restart
 su zimbra
 zmmailboxdctl restart
 ```
+
+**Admin password reset**
+
+> If you do not know about administrator email address, please check the next item.
+```
+su - zimbra
+zmprov sp <admin email address> <new password>
+
+```
+
+**Obtain list of all administrators**
+```
+su - zimbra
+zmprov gaaa
+```
