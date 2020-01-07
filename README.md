@@ -18,14 +18,14 @@ This Zimlet supports optional single sign-on to imMail using the imMail API. Tha
 
 In order to allow the integration with imMail, will be necessary to generate an API KEY.
 
-1. Go to www.immail.com.br;
+1. Go to www.immail.ca;
 
 2. If the domain that you want to configure already has an admin account in imMail, log in. Otherwise, create a new account (the first account created for each domain always will be the user admin);
 
 3. Click the menu button on the top side of the screen and choose the "Manage Domain" option;
 
 4. Go to API KEY tab;
-![image](https://user-images.githubusercontent.com/279535/55339530-dc439e00-5470-11e9-8e45-cee89b977831.png)
+![image](https://user-images.githubusercontent.com/279535/71903033-388acb00-3131-11ea-8521-a96a868af0e8.png)
 
 5. Click on "Gerar API KEY" button;
 
@@ -45,13 +45,13 @@ $ cp extension.jar /opt/zimbra/lib/ext/immail/extension.jar
 2. Then create the _config.properties_ text file in _/opt/zimbra/lib/ext/immail/config.properties_ with the contents:
 
 ```
-immailURL=https://api.immail.com.br
+immailURL=https://api.immail.ca
 immailCreateTokenPath=/auth/token
 ```
 
 3. This Zimlet allows integration of multiple domains. In order to make it possible, it is necessary to create the file in _/opt/zimbra/lib/ext/immail/config.domains.json_ as the example below:
 
-> Note that you have to set the apiKey and the correspondent domain. Each Api Key is unique and exclusive for each domain. If you have no Api Key, please, contact us via imMail App (support@immail.com.br).
+> Note that you have to set the apiKey and the correspondent domain. Each Api Key is unique and exclusive for each domain. If you have no Api Key, please, contact us via imMail App (support@immail.ca).
 
 ```
 [
@@ -75,7 +75,7 @@ $ zmmailboxdctl restart
 
 ## Basic Integration
 
-1. Download the _br_com_immail.zip_ file into the server.
+1. Download the ca_immail.zip_ file into the server.
 2. Change to zimbra user.
 
 ```
@@ -84,12 +84,12 @@ su zimbra
 3. Execute the deploy command:
 
 ```
-zmzimletctl deploy br_com_immail.zip
+zmzimletctl deploy ca_immail.zip
 ```
 4. Grant permission to imMail domains.
 
 ```
-zmprov mc default +zimbraProxyAllowedDomains *.immail.com.br
+zmprov mc default +zimbraProxyAllowedDomains *.immail.ca
 ```
 5. Clean up the Zimlet cache.
 
@@ -103,7 +103,7 @@ After update the zimlet you may have to clean up the cache.
 ## LDAP Integration
 In order to keep synchronized the user data in both platforms,  Zimbra and imMail, the LDAP data should be configured on imMail.
 
-1. Go to www.immail.com.br;
+1. Go to www.immail.ca;
 
 2. If the domain that you want to configure already has an admin account in imMail, log in. Otherwise create a new account (the first account created for each domain always will be the user admin);
 
@@ -131,7 +131,7 @@ To find the setting option screen/windows, open Chrome settings, type "content" 
 
 Click [here](https://www.chromium.org/for-testers/bug-reporting-guidelines/uncaught-securityerror-failed-to-read-the-localstorage-property-from-window-access-is-denied-for-this-document) for more info.
 
-## Development
+# Development
 
 The project has two most important directories "/zimlet" and "/extension".
 
@@ -145,7 +145,7 @@ The project has two most important directories "/zimlet" and "/extension".
 
 Open the "extension" folder on IntelliJ, go to main menu and click on "Build", and then "Build Artifacts", and finally "Build".
 
-**Step 2**: Update the iframeURL properties on /zimlet/config_template.xml with the imMail frondend url. For example: https://app.immail.com.br (for production) or https://testapp.immail.com.br (for test environment).
+**Step 2**: Update the iframeURL properties on /zimlet/config_template.xml with the imMail frondend url. For example: https://app.immail.ca (for production) or https://testapp.immail.com.br (for test environment).
 
 **Step3**: Run .build.sh providing the current version of the Zimlet like below:
 ```
