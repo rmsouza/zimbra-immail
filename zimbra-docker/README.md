@@ -13,11 +13,14 @@ docker build -t immail/zimbra-docker .
 ## Creating Zimbra Containers
 Now that we have an image called immail/zimbra-docker, we can do a docker run with some special parameters, like this:
 ```bash
-docker run -p 25:25 -p 80:80 -p 465:465 -p 587:587 -p 110:110 -p 143:143 -p 993:993 -p 995:995 -p 443:443 -p 8080:8080 -p 8443:8443 -p 7071:7071 -p 9071:9071 -h zimbra-docker.zimbra.io --dns 127.0.0.1 --dns 8.8.8.8 -i -t -e PASSWORD=Zimbra2017 immail/zimbra-docker
+docker run -p 25:25 -p 80:80 -p 465:465 -p 587:587 -p 110:110 -p 143:143 -p 993:993 -p 995:995 -p 443:443 -p 8080:8080 -p 8443:8443 -p 7071:7071 -p 9071:9071 -h zimbra-docker.zimbra.io --dns 127.0.0.1 --dns 8.8.8.8 -i -t -e PASSWORD=zimbra immail/zimbra-docker
 ```
 As you can see we tell the container the ports we want to expose, and on which port, we also specify the container hostname, the password foir the Zimbra Administrator Account, and the image to use.
 
 That's it! You can visit now the IP of your Docker Machine using HTTPS, or try the Admin Console with HTTPS and port 7071.
+
+- [Admin Console](https://localhost:7071)
+- [Webmail](https://localhost:8443)
 
 ## Known issues
 
