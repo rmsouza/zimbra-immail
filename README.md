@@ -193,6 +193,10 @@ su - zimbra
 zmprov gaaa
 ```
 
+**Zimbra Installation**
+
+[Click here](https://github.com/immail/zimbra-immail/tree/master/zimbra-docker) to follow the Zimbra installation using Docker.
+
 **Zimbra connection test**
 
 Install ldap-utils. If you want to know a little more about how to manage LDAP servers with OpenLDAP utils, please take a look this https://www.digitalocean.com/community/tutorials/how-to-manage-and-use-ldap-servers-with-openldap-utilities
