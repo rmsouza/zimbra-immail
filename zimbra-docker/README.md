@@ -19,7 +19,7 @@ As you can see we tell the container the ports we want to expose, and on which p
 
 That's it! You can visit now the IP of your Docker Machine using HTTPS, or try the Admin Console with HTTPS and port 7071.
 
-- [Admin Console](https://localhost:7071)
+- [Admin Console](https://localhost:7071) https://localhost:7071
 
 Default admin login and password
 ```
@@ -27,7 +27,7 @@ login: admin
 password: zimbra
 ```
 
-- [Webmail](https://localhost:8443)
+- [Webmail](https://localhost:8443) https://localhost:8443
 
 ## Known issues
 
